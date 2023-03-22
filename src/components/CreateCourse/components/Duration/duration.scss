@@ -1,0 +1,19 @@
+.duration {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	justify-content: space-between;
+	&-title {
+		text-align: center;
+	}
+	&-input {
+		height: 50px;
+		width: 100%;
+	}
+	&-text {
+		font-size: 22px;
+		span {
+			font-size: 28px;
+		}
+	}
+}

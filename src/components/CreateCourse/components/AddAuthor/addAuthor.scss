@@ -1,0 +1,17 @@
+.addAuthor {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	justify-content: space-between;
+	&-title {
+		text-align: center;
+	}
+	&-input {
+		height: 50px;
+		width: 100%;
+	}
+	&-button {
+		text-align: center;
+		height: 30px;
+	}
+}

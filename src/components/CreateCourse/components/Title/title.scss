@@ -1,0 +1,13 @@
+.title {
+	align-items: flex-end;
+	display: flex;
+	height: 65px;
+	justify-content: space-between;
+	&-input {
+		height: 80%;
+		width: 30%;
+	}
+	&-button {
+		height: 30px;
+	}
+}

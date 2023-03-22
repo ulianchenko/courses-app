@@ -1,0 +1,8 @@
+.search {
+	display: flex;
+	gap: 15px;
+	width: 65%;
+	&-input {
+		width: 45%;
+	}
+}

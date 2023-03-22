@@ -1,0 +1,44 @@
+.createCourse {
+	border: 2px solid rgb(78, 146, 179);
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	margin-top: 15px;
+	padding: 15px;
+	&-info {
+		border: 2px solid rgb(0, 0, 0);
+		display: flex;
+		padding: 15px;
+		&__general {
+			display: flex;
+			flex-direction: column;
+			gap: 30px;
+			justify-content: space-between;
+			width: 50%;
+		}
+		&__authors {
+			align-items: center;
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+			justify-content: space-between;
+			width: 50%;
+		}
+		&__authorsList {
+			width: 50%;
+		}
+		&__courseAuthorsList {
+			width: 50%;
+		}
+	}
+	& .invalid {
+		outline: 2px dashed rgb(255, 0, 0);
+		outline-offset: 5px;
+	}
+	& .invalidMessage {
+		color: rgb(255, 0, 0);
+		font-size: 12px;
+		margin-top: 5px;
+		width: 100%;
+	}
+}

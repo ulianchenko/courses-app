@@ -1,0 +1,17 @@
+.authors {
+	text-align: center;
+	&-title {
+		margin-bottom: 15px;
+	}
+	&-authorsList {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		list-style-type: none;
+		padding: 0;
+	}
+	&-authorsItem {
+		display: flex;
+		justify-content: space-between;
+	}
+}

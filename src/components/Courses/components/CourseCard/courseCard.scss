@@ -1,0 +1,25 @@
+.card {
+	align-items: center;
+	border: 2px solid rgb(65, 159, 105);
+	display: flex;
+	justify-content: space-between;
+	padding: 15px;
+	&-text {
+		width: 50%;
+	}
+	&-info {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		width: 25%;
+		&__authors {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		&__button {
+			display: flex;
+			justify-content: center;
+		}
+	}
+}

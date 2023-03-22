@@ -1,0 +1,18 @@
+.description {
+	height: 120px;
+	&-textarea {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		& textarea {
+			border: 2px solid rgb(244, 238, 117);
+			font-family: Tahoma, sans-serif;
+			font-size: 13px;
+			height: 100%;
+			padding: 10px 15px;
+			&:focus-visible {
+				outline: none;
+			}
+		}
+	}
+}
