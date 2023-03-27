@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
+import Header from '../Header';
 import Title from './components/Title';
 import Description from './components/Description/Description';
 import AddAuthor from './components/AddAuthor/AddAuthor';
@@ -17,7 +19,7 @@ import dateGenerator from '../../helpers/dateGenerator';
 
 import './createCourse.scss';
 
-const CreateCourse = ({ onShowCourses }) => {
+const CreateCourse = () => {
 	const [authorName, setAuthorName] = useState('');
 	const [courseTitle, setCourseTitle] = useState('');
 	const [courseDescription, setCourseDescription] = useState('');
@@ -25,11 +27,14 @@ const CreateCourse = ({ onShowCourses }) => {
 	const [authors, setAuthors] = useState([...mockedAuthorsList]);
 	const [courseAuthors, setCourseAuthors] = useState([]);
 
+	const navigate = useNavigate();
+
 	const handleClickCreateCourse = () => {
 		if (!courseTitle || !courseDuration || courseAuthors.length === 0) {
 			alert(validateText.allFields);
 			return;
 		}
+
 		const newCourse = {
 			id: uuidv4(),
 			title: courseTitle,
@@ -38,8 +43,10 @@ const CreateCourse = ({ onShowCourses }) => {
 			duration: courseDuration,
 			authors: courseAuthors.map((courseAuthor) => courseAuthor.id),
 		};
+
 		mockedCoursesList.push(newCourse);
-		onShowCourses();
+
+		navigate('/courses');
 	};
 
 	const handleChangeCourseTitle = ({ target }) => {
@@ -82,52 +89,55 @@ const CreateCourse = ({ onShowCourses }) => {
 	};
 
 	return (
-		<section className='createCourse'>
-			<div className='createCourse-title'>
-				<Title
-					courseTitle={courseTitle}
-					handleChangeCourseTitle={handleChangeCourseTitle}
-					handleClickCreateCourse={handleClickCreateCourse}
-				/>
-			</div>
-			<div className='createCourse-description'>
-				<Description
-					courseDescription={courseDescription}
-					handleChangeCourseDescription={handleChangeCourseDescription}
-				/>
-			</div>
-			<div className='createCourse-info'>
-				<div className='createCourse-info__general'>
-					<div className='createCourse-info__addAuthor'>
-						<AddAuthor
-							authorName={authorName}
-							handleChangeAuthorName={handleChangeAuthorName}
-							handleClickCreateAuthor={handleClickCreateAuthor}
-						/>
+		<div className='container'>
+			<Header />
+			<section className='createCourse'>
+				<div className='createCourse-title'>
+					<Title
+						courseTitle={courseTitle}
+						handleChangeCourseTitle={handleChangeCourseTitle}
+						handleClickCreateCourse={handleClickCreateCourse}
+					/>
+				</div>
+				<div className='createCourse-description'>
+					<Description
+						courseDescription={courseDescription}
+						handleChangeCourseDescription={handleChangeCourseDescription}
+					/>
+				</div>
+				<div className='createCourse-info'>
+					<div className='createCourse-info__general'>
+						<div className='createCourse-info__addAuthor'>
+							<AddAuthor
+								authorName={authorName}
+								handleChangeAuthorName={handleChangeAuthorName}
+								handleClickCreateAuthor={handleClickCreateAuthor}
+							/>
+						</div>
+						<div className='createCourse-info__duration'>
+							<Duration
+								courseDuration={courseDuration}
+								handleChangeCourseDuration={handleChangeCourseDuration}
+							/>
+						</div>
 					</div>
-					<div className='createCourse-info__duration'>
-						<Duration
-							courseDuration={courseDuration}
-							handleChangeCourseDuration={handleChangeCourseDuration}
-						/>
+					<div className='createCourse-info__authors'>
+						<div className='createCourse-info__authorsList'>
+							<AuthorsList
+								authors={authors}
+								handleClickAddAuthor={handleClickAddAuthor}
+							/>
+						</div>
+						<div className='createCourse-info__courseAuthorsList'>
+							<CourseAuthorsList
+								courseAuthors={courseAuthors}
+								handleClickDeleteAuthor={handleClickDeleteAuthor}
+							/>
+						</div>
 					</div>
 				</div>
-				<div className='createCourse-info__authors'>
-					<div className='createCourse-info__authorsList'>
-						<AuthorsList
-							authors={authors}
-							handleClickAddAuthor={handleClickAddAuthor}
-						/>
-					</div>
-					<div className='createCourse-info__courseAuthorsList'>
-						<CourseAuthorsList
-							courseAuthors={courseAuthors}
-							handleClickDeleteAuthor={handleClickDeleteAuthor}
-						/>
-					</div>
-				</div>
-			</div>
-		</section>
+			</section>
+		</div>
 	);
 };
 

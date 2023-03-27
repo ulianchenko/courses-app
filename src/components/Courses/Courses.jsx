@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import Header from '../Header';
 import SearchBar from './components/SearchBar';
 import Button from '../../common/Button';
 import CourseCard from './components/CourseCard/CourseCard';
@@ -10,9 +12,11 @@ import { mockedCoursesList, mockedAuthorsList } from '../../constants';
 
 import './courses.scss';
 
-const Courses = ({ onAddNewCourse }) => {
+const Courses = () => {
 	const [filteredCoursesList, setFilteredCoursesList] =
 		useState(mockedCoursesList);
+
+	const navigate = useNavigate();
 
 	const handleSearch = (searchRequest) => {
 		const courses =
@@ -27,24 +31,32 @@ const Courses = ({ onAddNewCourse }) => {
 	};
 
 	const handleClickAddNewCourse = () => {
-		onAddNewCourse();
+		navigate('/courses/add');
 	};
 
 	const cards = filteredCoursesList.map(({ id, ...props }) => (
-		<CourseCard key={id} {...props} mockedAuthorsList={mockedAuthorsList} />
+		<CourseCard
+			key={id}
+			id={id}
+			{...props}
+			mockedAuthorsList={mockedAuthorsList}
+		/>
 	));
 
 	return (
-		<section className='courses'>
-			<div className='courses-interface'>
-				<SearchBar onSearch={handleSearch} />
-				<Button
-					buttonText={buttonText.addNewCourse}
-					onClick={handleClickAddNewCourse}
-				/>
-			</div>
-			<ul className='courses-cards'>{cards}</ul>
-		</section>
+		<div className='container'>
+			<Header />
+			<section className='courses'>
+				<div className='courses-interface'>
+					<SearchBar onSearch={handleSearch} />
+					<Button
+						buttonText={buttonText.addNewCourse}
+						onClick={handleClickAddNewCourse}
+					/>
+				</div>
+				<ul className='courses-cards'>{cards}</ul>
+			</section>
+		</div>
 	);
 };
 

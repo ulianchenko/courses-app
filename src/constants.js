@@ -51,6 +51,8 @@ const buttonText = {
 	createAuthor: 'Create author',
 	addAuthor: 'Add author',
 	deleteAuthor: 'Delete author',
+	registration: 'Registration',
+	login: 'Login',
 };
 
 const labelText = {
@@ -58,6 +60,9 @@ const labelText = {
 	description: 'Description',
 	duration: 'Duration',
 	authorName: 'Author name',
+	name: 'Name',
+	email: 'Email',
+	password: 'Password',
 };
 
 const placeholderText = {
@@ -67,6 +72,9 @@ const placeholderText = {
 	duration: 'Enter duration in minutes...',
 	authorName: 'Enter author name...',
 	emptyList: 'Authors list is empty...',
+	name: 'Enter name...',
+	email: 'Enter email...',
+	password: 'Enter password...',
 };
 
 const titleText = {
@@ -74,6 +82,8 @@ const titleText = {
 	authors: 'Authors',
 	duration: 'Duration',
 	courseAuthors: 'Course authors',
+	registration: 'Registration',
+	login: 'Login',
 };
 
 const paragraphText = {
@@ -89,9 +99,24 @@ const durationSettings = {
 	default: '00:00',
 };
 
+const registrationSettings = {
+	info: 'If you have an account you can',
+	login: 'Login',
+};
+
+const loginSettings = {
+	info: 'If you do not have an account you can',
+	register: 'Register',
+};
+
+const courseInfoSettings = {
+	linkText: '< Back to courses',
+};
+
 const infoSettings = {
 	authors: 'Authors:',
 	created: 'Created:',
+	id: 'ID:',
 };
 
 const validateText = {
@@ -100,6 +125,8 @@ const validateText = {
 	addAuthor: 'Author name should contain at least 2 characters',
 	duration: 'Duration should contain only numbers more than 0',
 	allFields: 'Please, filled in all fields',
+	invalidLoginPassword: 'Invalid login or password',
+	invalidRegistrationData: 'Invalid registration data',
 };
 
 export {
@@ -113,4 +140,7 @@ export {
 	infoSettings,
 	paragraphText,
 	validateText,
+	registrationSettings,
+	loginSettings,
+	courseInfoSettings,
 };

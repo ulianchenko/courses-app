@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import Button from '../../../../common/Button';
 
 import {
@@ -11,6 +13,7 @@ import pipeDuration from '../../../../helpers/pipeDuration';
 import './courseCard.scss';
 
 const CourseCard = ({
+	id,
 	title,
 	duration,
 	creationDate,
@@ -18,8 +21,15 @@ const CourseCard = ({
 	authors,
 	mockedAuthorsList,
 }) => {
+	const navigate = useNavigate();
+
 	const authorsStr = createAuthorsStr(authors, mockedAuthorsList);
+
 	const durationStr = pipeDuration(duration, durationSettings);
+
+	const handleShowCourse = () => {
+		navigate(`/courses/${id}`);
+	};
 	return (
 		<li className='card'>
 			<div className='card-text'>
@@ -38,7 +48,10 @@ const CourseCard = ({
 					<b>{infoSettings.created}</b> {creationDate.replace(/\//g, '.')}
 				</p>
 				<div className='card-info__button'>
-					<Button buttonText={buttonText.showCourse} />
+					<Button
+						buttonText={buttonText.showCourse}
+						onClick={handleShowCourse}
+					/>
 				</div>
 			</div>
 		</li>

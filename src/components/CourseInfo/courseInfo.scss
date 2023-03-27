@@ -1,0 +1,24 @@
+.courseInfo {
+	border: 2px solid rgb(78, 146, 179);
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	margin-top: 15px;
+	height: 80vh;
+	padding: 15px;
+	&-title {
+		text-align: center;
+	}
+	&-text {
+		display: flex;
+		justify-content: space-between;
+		&__description {
+			width: 50%;
+		}
+		&__info {
+			width: 27%;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+	}
+}
