@@ -27,7 +27,7 @@ const Duration = ({ courseDuration, handleChangeCourseDuration }) => {
 			<div className={className}>
 				<Input
 					onChange={handleChangeCourseDuration}
-					value={courseDuration}
+					value={Number(courseDuration) ? courseDuration : ''}
 					placeholderText={placeholderText.duration}
 					labelText={labelText.duration}
 				/>

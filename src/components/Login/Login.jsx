@@ -62,7 +62,7 @@ const Login = () => {
 
 	return (
 		<div className='container'>
-			<Header showLoginInfo={false} />
+			<Header />
 			<section className='login'>
 				<form className={formClassName} onSubmit={handleSubmit}>
 					<h3 className='login-form__title'>{titleText.login}</h3>

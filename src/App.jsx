@@ -1,6 +1,11 @@
-import { useEffect } from 'react';
-import { createBrowserRouter, useNavigate } from 'react-router-dom';
+import {
+	createBrowserRouter,
+	redirect,
+	Outlet,
+	useHref,
+} from 'react-router-dom';
 
+import Header from './components/Header';
 import Courses from './components/Courses';
 import CreateCourse from './components/CreateCourse';
 import Registration from './components/Registration';
@@ -15,6 +20,29 @@ const router = createBrowserRouter([
 		path: '/',
 		element: <App />,
 		errorElement: <Error />,
+		loader: () => {
+			if (!localStorage.getItem('token')) {
+				return redirect('/login');
+			}
+			return null;
+		},
+		children: [
+			{
+				path: '/courses',
+				element: <Courses />,
+				errorElement: <Error />,
+			},
+			{
+				path: '/courses/:courseId',
+				element: <CourseInfo />,
+				errorElement: <Error />,
+			},
+			{
+				path: '/courses/add',
+				element: <CreateCourse />,
+				errorElement: <Error />,
+			},
+		],
 	},
 	{
 		path: '/registration',
@@ -26,35 +54,19 @@ const router = createBrowserRouter([
 		element: <Login />,
 		errorElement: <Error />,
 	},
-	{
-		path: '/courses',
-		element: <Courses />,
-		errorElement: <Error />,
-	},
-	{
-		path: '/courses/:courseId',
-		element: <CourseInfo />,
-		errorElement: <Error />,
-	},
-	{
-		path: '/courses/add',
-		element: <CreateCourse />,
-		errorElement: <Error />,
-	},
 ]);
 
 function App() {
-	const navigate = useNavigate();
+	const href = useHref();
 
-	useEffect(() => {
-		if (localStorage.getItem('token')) {
-			navigate('/courses');
-		} else {
-			navigate('/login');
-		}
-	}, [navigate]);
+	const component = href === '/' ? <Courses /> : <Outlet />;
 
-	return <div className='container'></div>;
+	return (
+		<div className='container'>
+			<Header />
+			{component}
+		</div>
+	);
 }
 
 export default App;

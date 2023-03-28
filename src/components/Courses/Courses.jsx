@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Header from '../Header';
 import SearchBar from './components/SearchBar';
 import Button from '../../common/Button';
 import CourseCard from './components/CourseCard/CourseCard';
@@ -44,19 +43,16 @@ const Courses = () => {
 	));
 
 	return (
-		<div className='container'>
-			<Header />
-			<section className='courses'>
-				<div className='courses-interface'>
-					<SearchBar onSearch={handleSearch} />
-					<Button
-						buttonText={buttonText.addNewCourse}
-						onClick={handleClickAddNewCourse}
-					/>
-				</div>
-				<ul className='courses-cards'>{cards}</ul>
-			</section>
-		</div>
+		<section className='courses'>
+			<div className='courses-interface'>
+				<SearchBar onSearch={handleSearch} />
+				<Button
+					buttonText={buttonText.addNewCourse}
+					onClick={handleClickAddNewCourse}
+				/>
+			</div>
+			<ul className='courses-cards'>{cards}</ul>
+		</section>
 	);
 };
 

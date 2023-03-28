@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
-import Header from '../Header';
 import Title from './components/Title';
 import Description from './components/Description/Description';
 import AddAuthor from './components/AddAuthor/AddAuthor';
@@ -16,6 +15,7 @@ import {
 	validateText,
 } from '../../constants';
 import dateGenerator from '../../helpers/dateGenerator';
+import validateInput from '../../helpers/validateInput';
 
 import './createCourse.scss';
 
@@ -30,7 +30,15 @@ const CreateCourse = () => {
 	const navigate = useNavigate();
 
 	const handleClickCreateCourse = () => {
-		if (!courseTitle || !courseDuration || courseAuthors.length === 0) {
+		if (
+			!validateInput(courseTitle).minLength(2).isValid() ||
+			!validateInput(courseDescription).minLength(2).isValid() ||
+			!validateInput(courseDuration)
+				.isNumbersOnly()
+				.isMoreThanZero()
+				.isValid() ||
+			courseAuthors.length === 0
+		) {
 			alert(validateText.allFields);
 			return;
 		}
@@ -69,6 +77,8 @@ const CreateCourse = () => {
 	};
 
 	const handleChangeCourseDuration = ({ target }) => {
+		// const duration = !!Number(target.value) ? target.value : '';
+		// setCourseDuration(duration);
 		setCourseDuration(target.value);
 	};
 
@@ -89,55 +99,52 @@ const CreateCourse = () => {
 	};
 
 	return (
-		<div className='container'>
-			<Header />
-			<section className='createCourse'>
-				<div className='createCourse-title'>
-					<Title
-						courseTitle={courseTitle}
-						handleChangeCourseTitle={handleChangeCourseTitle}
-						handleClickCreateCourse={handleClickCreateCourse}
-					/>
-				</div>
-				<div className='createCourse-description'>
-					<Description
-						courseDescription={courseDescription}
-						handleChangeCourseDescription={handleChangeCourseDescription}
-					/>
-				</div>
-				<div className='createCourse-info'>
-					<div className='createCourse-info__general'>
-						<div className='createCourse-info__addAuthor'>
-							<AddAuthor
-								authorName={authorName}
-								handleChangeAuthorName={handleChangeAuthorName}
-								handleClickCreateAuthor={handleClickCreateAuthor}
-							/>
-						</div>
-						<div className='createCourse-info__duration'>
-							<Duration
-								courseDuration={courseDuration}
-								handleChangeCourseDuration={handleChangeCourseDuration}
-							/>
-						</div>
+		<section className='createCourse'>
+			<div className='createCourse-title'>
+				<Title
+					courseTitle={courseTitle}
+					handleChangeCourseTitle={handleChangeCourseTitle}
+					handleClickCreateCourse={handleClickCreateCourse}
+				/>
+			</div>
+			<div className='createCourse-description'>
+				<Description
+					courseDescription={courseDescription}
+					handleChangeCourseDescription={handleChangeCourseDescription}
+				/>
+			</div>
+			<div className='createCourse-info'>
+				<div className='createCourse-info__general'>
+					<div className='createCourse-info__addAuthor'>
+						<AddAuthor
+							authorName={authorName}
+							handleChangeAuthorName={handleChangeAuthorName}
+							handleClickCreateAuthor={handleClickCreateAuthor}
+						/>
 					</div>
-					<div className='createCourse-info__authors'>
-						<div className='createCourse-info__authorsList'>
-							<AuthorsList
-								authors={authors}
-								handleClickAddAuthor={handleClickAddAuthor}
-							/>
-						</div>
-						<div className='createCourse-info__courseAuthorsList'>
-							<CourseAuthorsList
-								courseAuthors={courseAuthors}
-								handleClickDeleteAuthor={handleClickDeleteAuthor}
-							/>
-						</div>
+					<div className='createCourse-info__duration'>
+						<Duration
+							courseDuration={courseDuration}
+							handleChangeCourseDuration={handleChangeCourseDuration}
+						/>
 					</div>
 				</div>
-			</section>
-		</div>
+				<div className='createCourse-info__authors'>
+					<div className='createCourse-info__authorsList'>
+						<AuthorsList
+							authors={authors}
+							handleClickAddAuthor={handleClickAddAuthor}
+						/>
+					</div>
+					<div className='createCourse-info__courseAuthorsList'>
+						<CourseAuthorsList
+							courseAuthors={courseAuthors}
+							handleClickDeleteAuthor={handleClickDeleteAuthor}
+						/>
+					</div>
+				</div>
+			</div>
+		</section>
 	);
 };
 

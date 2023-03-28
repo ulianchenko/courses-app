@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Logo from './components/Logo';
 import Button from '../../common/Button';
@@ -6,7 +6,7 @@ import { buttonText } from '../../constants';
 
 import './header.scss';
 
-const Header = ({ showLoginInfo = true }) => {
+const Header = () => {
 	const navigate = useNavigate();
 
 	const loggedIn = localStorage.getItem('token')
@@ -18,7 +18,7 @@ const Header = ({ showLoginInfo = true }) => {
 		navigate('/login');
 	};
 
-	const loginInfo = showLoginInfo ? (
+	const loginInfo = (
 		<>
 			<div className='header-login'>
 				{loggedIn ? (
@@ -32,11 +32,13 @@ const Header = ({ showLoginInfo = true }) => {
 				) : null}
 			</div>
 		</>
-	) : null;
+	);
 
 	return (
 		<header className='header'>
-			<Logo className='header__logo' />
+			<Link to={'/'}>
+				<Logo className='header__logo' />
+			</Link>
 			{loginInfo}
 		</header>
 	);
