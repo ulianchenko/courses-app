@@ -1,4 +1,7 @@
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { ReactComponent as Pencil } from '../../../../assets/svg/pencil.svg';
+import { ReactComponent as Trash } from '../../../../assets/svg/trash.svg';
 
 import Button from '../../../../common/Button';
 
@@ -9,6 +12,7 @@ import {
 } from '../../../../constants';
 import createAuthorsStr from '../../../../helpers/createAuthorsStr';
 import pipeDuration from '../../../../helpers/pipeDuration';
+import { courseRemove } from '../../../../store/courses/actionCreators';
 
 import './courseCard.scss';
 
@@ -19,16 +23,22 @@ const CourseCard = ({
 	creationDate,
 	description,
 	authors,
-	mockedAuthorsList,
+	authorsList,
 }) => {
+	const dispatch = useDispatch();
+
 	const navigate = useNavigate();
 
-	const authorsStr = createAuthorsStr(authors, mockedAuthorsList);
+	const authorsStr = createAuthorsStr(authors, authorsList);
 
 	const durationStr = pipeDuration(duration, durationSettings);
 
 	const handleShowCourse = () => {
 		navigate(`/courses/${id}`);
+	};
+
+	const handleRemoveCourse = () => {
+		dispatch(courseRemove(id));
 	};
 	return (
 		<li className='card'>
@@ -52,6 +62,8 @@ const CourseCard = ({
 						buttonText={buttonText.showCourse}
 						onClick={handleShowCourse}
 					/>
+					<Button icon={<Pencil />} />
+					<Button onClick={handleRemoveCourse} icon={<Trash />} />
 				</div>
 			</div>
 		</li>

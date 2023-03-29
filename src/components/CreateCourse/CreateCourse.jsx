@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Title from './components/Title';
 import Description from './components/Description/Description';
@@ -9,23 +10,28 @@ import Duration from './components/Duration/Duration';
 import AuthorsList from './components/AuthorsList/AuthorsList';
 import CourseAuthorsList from './components/CourseAuthorsList';
 
-import {
-	mockedCoursesList,
-	mockedAuthorsList,
-	validateText,
-} from '../../constants';
+import { validateText } from '../../constants';
 import dateGenerator from '../../helpers/dateGenerator';
 import validateInput from '../../helpers/validateInput';
+import { courseAdd } from '../../store/courses/actionCreators';
+import { authorAdd } from '../../store/authors/actionCreators';
+import { getAuthorsList } from '../../selectors';
 
 import './createCourse.scss';
 
 const CreateCourse = () => {
+	const authorsList = useSelector(getAuthorsList);
 	const [authorName, setAuthorName] = useState('');
 	const [courseTitle, setCourseTitle] = useState('');
 	const [courseDescription, setCourseDescription] = useState('');
 	const [courseDuration, setCourseDuration] = useState('');
-	const [authors, setAuthors] = useState([...mockedAuthorsList]);
+	const [authors, setAuthors] = useState([]);
 	const [courseAuthors, setCourseAuthors] = useState([]);
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	useEffect(() => setAuthors(authorsList), [authorsList]);
+
+	const dispatch = useDispatch();
 
 	const navigate = useNavigate();
 
@@ -52,7 +58,7 @@ const CreateCourse = () => {
 			authors: courseAuthors.map((courseAuthor) => courseAuthor.id),
 		};
 
-		mockedCoursesList.push(newCourse);
+		dispatch(courseAdd(newCourse));
 
 		navigate('/courses');
 	};
@@ -67,7 +73,7 @@ const CreateCourse = () => {
 
 	const handleClickCreateAuthor = () => {
 		const newAuthor = { id: uuidv4(), name: authorName };
-		mockedAuthorsList.push(newAuthor);
+		dispatch(authorAdd(newAuthor));
 		setAuthors((prevAuthors) => [...prevAuthors, newAuthor]);
 		setAuthorName('');
 	};
@@ -77,8 +83,6 @@ const CreateCourse = () => {
 	};
 
 	const handleChangeCourseDuration = ({ target }) => {
-		// const duration = !!Number(target.value) ? target.value : '';
-		// setCourseDuration(duration);
 		setCourseDuration(target.value);
 	};
 

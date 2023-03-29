@@ -1,46 +1,48 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import SearchBar from './components/SearchBar';
 import Button from '../../common/Button';
 import CourseCard from './components/CourseCard/CourseCard';
 
 import { buttonText } from '../../constants';
-
-import { mockedCoursesList, mockedAuthorsList } from '../../constants';
+import { getACoursesList, getAuthorsList } from '../../selectors';
 
 import './courses.scss';
 
 const Courses = () => {
-	const [filteredCoursesList, setFilteredCoursesList] =
-		useState(mockedCoursesList);
+	const coursesList = useSelector(getACoursesList);
+	const authorsList = useSelector(getAuthorsList);
+	const [filteredCoursesList, setFilteredCoursesList] = useState([]);
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	useEffect(() => setFilteredCoursesList(coursesList), [coursesList]);
 
 	const navigate = useNavigate();
 
 	const handleSearch = (searchRequest) => {
-		const courses =
+		const searchCourses =
 			searchRequest === ''
-				? mockedCoursesList
-				: mockedCoursesList.filter(
+				? coursesList
+				: coursesList.filter(
 						({ title, id }) =>
 							title.match(new RegExp(`${searchRequest}`, 'gi')) ||
 							id.match(new RegExp(`${searchRequest}`, 'gi'))
 				  );
-		setFilteredCoursesList(courses);
+		setFilteredCoursesList(searchCourses);
 	};
 
 	const handleClickAddNewCourse = () => {
 		navigate('/courses/add');
 	};
 
-	const cards = filteredCoursesList.map(({ id, ...props }) => (
-		<CourseCard
-			key={id}
-			id={id}
-			{...props}
-			mockedAuthorsList={mockedAuthorsList}
-		/>
-	));
+	const cards =
+		filteredCoursesList.length === 0
+			? null
+			: filteredCoursesList.map(({ id, ...props }) => (
+					<CourseCard key={id} id={id} {...props} authorsList={authorsList} />
+			  ));
 
 	return (
 		<section className='courses'>

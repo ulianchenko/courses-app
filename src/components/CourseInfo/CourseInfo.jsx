@@ -1,23 +1,25 @@
 import { Link, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import {
 	courseInfoSettings,
-	mockedCoursesList,
-	mockedAuthorsList,
 	durationSettings,
 	infoSettings,
 } from '../../constants';
 import createAuthorsStr from '../../helpers/createAuthorsStr';
 import pipeDuration from '../../helpers/pipeDuration';
+import { getACoursesList, getAuthorsList } from '../../selectors';
 
 import './courseInfo.scss';
 
 const CourseInfo = () => {
 	const { courseId } = useParams();
+	const coursesList = useSelector(getACoursesList);
+	const authorsList = useSelector(getAuthorsList);
 	const { id, title, description, creationDate, duration, authors } =
-		mockedCoursesList.find((course) => course.id === courseId);
+		coursesList.find((course) => course.id === courseId);
 	const durationStr = pipeDuration(duration, durationSettings);
-	const authorsStr = createAuthorsStr(authors, mockedAuthorsList);
+	const authorsStr = createAuthorsStr(authors, authorsList);
 
 	return (
 		<section className='courseInfo'>

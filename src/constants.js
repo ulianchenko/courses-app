@@ -129,6 +129,12 @@ const validateText = {
 	invalidRegistrationData: 'Invalid registration data',
 };
 
+const http = {
+	base: 'http://localhost:4000',
+	courses: '/courses/all',
+	authors: '/authors/all',
+};
+
 export {
 	mockedCoursesList,
 	mockedAuthorsList,
@@ -143,4 +149,5 @@ export {
 	registrationSettings,
 	loginSettings,
 	courseInfoSettings,
+	http,
 };

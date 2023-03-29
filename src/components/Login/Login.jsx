@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
 import Header from '../Header';
@@ -13,6 +14,7 @@ import {
 	buttonText,
 	loginSettings,
 } from '../../constants';
+import { userLogin } from '../../store/user/actionCreators';
 
 import './login.scss';
 
@@ -20,6 +22,8 @@ const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [badResponse, setBadResponse] = useState([]);
+
+	const dispatch = useDispatch();
 
 	const navigate = useNavigate();
 
@@ -48,6 +52,7 @@ const Login = () => {
 			const result = await response.json();
 			if (response.ok) {
 				localStorage.setItem('token', JSON.stringify(result));
+				dispatch(userLogin(result));
 				navigate('/courses');
 			} else {
 				const responseErrors = result.errors ?? [result.result];

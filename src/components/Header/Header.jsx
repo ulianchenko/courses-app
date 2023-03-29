@@ -1,20 +1,27 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Logo from './components/Logo';
 import Button from '../../common/Button';
+
 import { buttonText } from '../../constants';
+import { userLogout } from '../../store/user/actionCreators';
+import { getLoggedIn, getUserName } from '../../selectors';
 
 import './header.scss';
 
 const Header = () => {
-	const navigate = useNavigate();
+	const loggedIn = useSelector(getLoggedIn);
+	const userName = useSelector(getUserName);
 
-	const loggedIn = localStorage.getItem('token')
-		? JSON.parse(localStorage.getItem('token')).user.name
-		: null;
+	const dispatch = useDispatch();
+
+	const navigate = useNavigate();
 
 	const handleLogoutButton = () => {
 		localStorage.removeItem('token');
+		dispatch(userLogout());
 		navigate('/login');
 	};
 
@@ -23,7 +30,7 @@ const Header = () => {
 			<div className='header-login'>
 				{loggedIn ? (
 					<>
-						<div className='header-login__username'>{loggedIn}</div>
+						<div className='header-login__username'>{userName}</div>
 						<Button
 							buttonText={buttonText.logout}
 							onClick={handleLogoutButton}
