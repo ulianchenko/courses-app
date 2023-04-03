@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Title from './components/Title';
@@ -10,26 +9,48 @@ import Duration from './components/Duration/Duration';
 import AuthorsList from './components/AuthorsList/AuthorsList';
 import CourseAuthorsList from './components/CourseAuthorsList';
 
-import { validateText } from '../../constants';
+import { fetchCourseAdd } from '../../store/courses/thunk';
+import { fetchAuthorAdd } from '../../store/authors/thunk';
+import { getAuthorsList, getUserToken } from '../../selectors';
 import dateGenerator from '../../helpers/dateGenerator';
-import validateInput from '../../helpers/validateInput';
-import { courseAdd } from '../../store/courses/actionCreators';
-import { authorAdd } from '../../store/authors/actionCreators';
-import { getAuthorsList } from '../../selectors';
+import validateCreateCourse from '../../helpers/validateCreateCourse';
+import filteredAuthorsFromIds from '../../helpers/filteredAuthorsFromIds';
+import filteredCourseAuthorsFromIds from '../../helpers/filteredCourseAuthorsFromIds';
+import filteredAuthorsFromList from '../../helpers/filteredAuthorsFromList';
+import { validateText } from '../../constants';
 
-import './createCourse.scss';
+import './courseForm.scss';
+import { fetchCourseUpdate } from '../../store/courses/thunk';
 
-const CreateCourse = () => {
+const CourseForm = ({ updateInfo }) => {
+	const { id, title, description, duration, courseAuthorsIdsArr } =
+		updateInfo ?? {
+			id: '',
+			title: '',
+			description: '',
+			duration: '',
+			courseAuthorsIdsArr: [],
+		};
+
 	const authorsList = useSelector(getAuthorsList);
+	const token = useSelector(getUserToken);
+	const authorsArr = filteredAuthorsFromIds(authorsList, courseAuthorsIdsArr);
+	const courseAuthorsArr = filteredCourseAuthorsFromIds(
+		authorsList,
+		courseAuthorsIdsArr
+	);
 	const [authorName, setAuthorName] = useState('');
-	const [courseTitle, setCourseTitle] = useState('');
-	const [courseDescription, setCourseDescription] = useState('');
-	const [courseDuration, setCourseDuration] = useState('');
-	const [authors, setAuthors] = useState([]);
-	const [courseAuthors, setCourseAuthors] = useState([]);
+	const [courseTitle, setCourseTitle] = useState(title);
+	const [courseDescription, setCourseDescription] = useState(description);
+	const [courseDuration, setCourseDuration] = useState(duration);
+	const [authors, setAuthors] = useState(authorsArr);
+	const [courseAuthors, setCourseAuthors] = useState(courseAuthorsArr);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => setAuthors(authorsList), [authorsList]);
+	useEffect(() => {
+		const authorsArr = filteredAuthorsFromList(authorsList, courseAuthors);
+		setAuthors(authorsArr);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [authorsList]);
 
 	const dispatch = useDispatch();
 
@@ -37,29 +58,50 @@ const CreateCourse = () => {
 
 	const handleClickCreateCourse = () => {
 		if (
-			!validateInput(courseTitle).minLength(2).isValid() ||
-			!validateInput(courseDescription).minLength(2).isValid() ||
-			!validateInput(courseDuration)
-				.isNumbersOnly()
-				.isMoreThanZero()
-				.isValid() ||
-			courseAuthors.length === 0
+			validateCreateCourse(
+				courseTitle,
+				courseDescription,
+				courseDuration,
+				courseAuthors
+			)
 		) {
 			alert(validateText.allFields);
 			return;
 		}
 
 		const newCourse = {
-			id: uuidv4(),
 			title: courseTitle,
 			description: courseDescription,
 			creationDate: dateGenerator(),
-			duration: courseDuration,
+			duration: +courseDuration,
 			authors: courseAuthors.map((courseAuthor) => courseAuthor.id),
 		};
 
-		dispatch(courseAdd(newCourse));
+		dispatch(fetchCourseAdd(token, newCourse));
 
+		navigate('/courses');
+	};
+
+	const handleClickUpdateCourse = () => {
+		if (
+			validateCreateCourse(
+				courseTitle,
+				courseDescription,
+				courseDuration,
+				courseAuthors
+			)
+		) {
+			alert(validateText.allFields);
+			return;
+		}
+
+		const course = {
+			title: courseTitle,
+			description: courseDescription,
+			duration: +courseDuration,
+			authors: courseAuthors.map((courseAuthor) => courseAuthor.id),
+		};
+		dispatch(fetchCourseUpdate(token, id, course));
 		navigate('/courses');
 	};
 
@@ -72,9 +114,8 @@ const CreateCourse = () => {
 	};
 
 	const handleClickCreateAuthor = () => {
-		const newAuthor = { id: uuidv4(), name: authorName };
-		dispatch(authorAdd(newAuthor));
-		setAuthors((prevAuthors) => [...prevAuthors, newAuthor]);
+		const newAuthor = { name: authorName };
+		dispatch(fetchAuthorAdd(token, newAuthor));
 		setAuthorName('');
 	};
 
@@ -107,8 +148,10 @@ const CreateCourse = () => {
 			<div className='createCourse-title'>
 				<Title
 					courseTitle={courseTitle}
+					updateInfo={updateInfo}
 					handleChangeCourseTitle={handleChangeCourseTitle}
 					handleClickCreateCourse={handleClickCreateCourse}
+					handleClickUpdateCourse={handleClickUpdateCourse}
 				/>
 			</div>
 			<div className='createCourse-description'>
@@ -152,4 +195,4 @@ const CreateCourse = () => {
 	);
 };
 
-export default CreateCourse;
+export default CourseForm;

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
 import Header from '../Header';
 import Input from '../../common/Input';
 import Button from '../../common/Button';
 
+import { postLogin } from '../../services';
 import {
 	titleText,
 	placeholderText,
@@ -14,7 +14,6 @@ import {
 	buttonText,
 	loginSettings,
 } from '../../constants';
-import { userLogin } from '../../store/user/actionCreators';
 
 import './login.scss';
 
@@ -22,8 +21,6 @@ const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [badResponse, setBadResponse] = useState([]);
-
-	const dispatch = useDispatch();
 
 	const navigate = useNavigate();
 
@@ -42,21 +39,19 @@ const Login = () => {
 			email,
 		};
 		try {
-			const response = await fetch('http://localhost:4000/login', {
-				method: 'POST',
-				body: JSON.stringify(user),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-			const result = await response.json();
+			const response = await postLogin(user);
+			const data = await response.json();
 			if (response.ok) {
-				localStorage.setItem('token', JSON.stringify(result));
-				dispatch(userLogin(result));
+				localStorage.setItem('token', data.result);
 				navigate('/courses');
 			} else {
-				const responseErrors = result.errors ?? [result.result];
-				setBadResponse(responseErrors);
+				const responseErrors = data.errors ?? [data.result];
+				const errorsMessage =
+					typeof responseErrors[0] === 'undefined'
+						? [response.statusText]
+						: responseErrors;
+
+				setBadResponse(errorsMessage);
 				throw Error(response.statusText);
 			}
 		} catch (error) {}

@@ -49,6 +49,7 @@ const buttonText = {
 	showCourse: 'Show course',
 	createCourse: 'Create course',
 	createAuthor: 'Create author',
+	updateCourse: 'Update course',
 	addAuthor: 'Add author',
 	deleteAuthor: 'Delete author',
 	registration: 'Registration',
@@ -119,6 +120,12 @@ const infoSettings = {
 	id: 'ID:',
 };
 
+const errorSettings = {
+	title: 'OOOPS!',
+	text: 'Sorry, an unexpected error has occured',
+	linkText: '< Back to courses',
+};
+
 const validateText = {
 	title: 'Title name should contain at least 2 characters',
 	description: 'Description text should contain at least 2 characters',
@@ -132,7 +139,15 @@ const validateText = {
 const http = {
 	base: 'http://localhost:4000',
 	courses: '/courses/all',
+	courseRemove: '/courses/',
+	courseUpdate: '/courses/',
+	courseAdd: '/courses/add',
 	authors: '/authors/all',
+	authorAdd: '/authors/add',
+	user: '/users/me',
+	login: '/login',
+	logout: '/logout',
+	register: '/register',
 };
 
 export {
@@ -150,4 +165,5 @@ export {
 	loginSettings,
 	courseInfoSettings,
 	http,
+	errorSettings,
 };

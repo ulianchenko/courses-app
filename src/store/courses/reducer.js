@@ -11,12 +11,12 @@ const userReducer = (state = coursesInitialState, action) => {
 		case coursesActionTypes.COURSE_REMOVE:
 			return state.filter((course) => course.id !== action.payload);
 		case coursesActionTypes.COURSE_UPDATE:
-			let courseForUpdate = state.find(
-				(course) => course.id === action.payload.id
-			);
+			let courseForUpdate = {
+				...state.find((course) => course.id === action.payload.id),
+			};
 			courseForUpdate = { ...action.payload };
 			return [
-				...state.filter((course) => course.id !== action.payload),
+				...state.filter((course) => course.id !== action.payload.id),
 				courseForUpdate,
 			];
 		default:

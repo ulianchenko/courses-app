@@ -15,8 +15,10 @@ import './title.scss';
 
 const Title = ({
 	courseTitle,
+	updateInfo,
 	handleChangeCourseTitle,
 	handleClickCreateCourse,
+	handleClickUpdateCourse,
 }) => {
 	const [focused, setFocused] = useState(false);
 
@@ -33,6 +35,17 @@ const Title = ({
 			? validateInput(courseTitle).minLength(2).isValid()
 			: true;
 	const className = valid || focused ? 'title-input' : 'title-input invalid';
+	const button = updateInfo ? (
+		<Button
+			buttonText={buttonText.updateCourse}
+			onClick={handleClickUpdateCourse}
+		/>
+	) : (
+		<Button
+			buttonText={buttonText.createCourse}
+			onClick={handleClickCreateCourse}
+		/>
+	);
 
 	return (
 		<div className='title'>
@@ -49,12 +62,7 @@ const Title = ({
 					<p className='title-input invalidMessage'>{validateText.title}</p>
 				)}
 			</div>
-			<div className='title-button'>
-				<Button
-					buttonText={buttonText.createCourse}
-					onClick={handleClickCreateCourse}
-				/>
-			</div>
+			<div className='title-button'>{button}</div>
 		</div>
 	);
 };

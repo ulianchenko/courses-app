@@ -6,6 +6,7 @@ import Header from '../Header';
 import Input from '../../common/Input';
 import Button from '../../common/Button';
 
+import { postRegister } from '../../services';
 import {
 	titleText,
 	placeholderText,
@@ -44,13 +45,7 @@ const Registration = () => {
 			email,
 		};
 		try {
-			const response = await fetch('http://localhost:4000/register', {
-				method: 'POST',
-				body: JSON.stringify(newUser),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
+			const response = await postRegister(newUser);
 			const result = await response.json();
 			if (response.ok) {
 				navigate('/login');

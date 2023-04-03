@@ -5,6 +5,7 @@ const userInitialState = {
 	name: '',
 	email: '',
 	token: '',
+	role: '',
 };
 
 const userReducer = (state = userInitialState, action) => {
@@ -13,9 +14,10 @@ const userReducer = (state = userInitialState, action) => {
 			return {
 				...state,
 				isAuth: true,
-				name: action.payload.user.name,
-				email: action.payload.user.email,
-				token: action.payload.result,
+				name: action.payload.name,
+				email: action.payload.email,
+				token: action.payload.token,
+				role: action.payload.role,
 			};
 		case userActionTypes.USER_LOGOUT:
 			return {
@@ -24,6 +26,7 @@ const userReducer = (state = userInitialState, action) => {
 				name: '',
 				email: '',
 				token: '',
+				role: '',
 			};
 		default:
 			return state;

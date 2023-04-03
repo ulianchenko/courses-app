@@ -1,8 +1,8 @@
 import userActionTypes from './actionTypes';
 
-export const userLogin = (token) => ({
+export const userLogin = (user) => ({
 	type: userActionTypes.USER_LOGIN,
-	payload: token,
+	payload: user,
 });
 
 export const userLogout = () => ({

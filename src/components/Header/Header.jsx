@@ -5,24 +5,23 @@ import { useSelector } from 'react-redux';
 import Logo from './components/Logo';
 import Button from '../../common/Button';
 
+import { fetchLogout } from '../../store/user/thunk';
+import { getLoggedIn, getUserName, getUserToken } from '../../selectors';
 import { buttonText } from '../../constants';
-import { userLogout } from '../../store/user/actionCreators';
-import { getLoggedIn, getUserName } from '../../selectors';
 
 import './header.scss';
 
 const Header = () => {
 	const loggedIn = useSelector(getLoggedIn);
 	const userName = useSelector(getUserName);
-
+	const userToken = useSelector(getUserToken);
 	const dispatch = useDispatch();
-
 	const navigate = useNavigate();
 
 	const handleLogoutButton = () => {
-		localStorage.removeItem('token');
-		dispatch(userLogout());
 		navigate('/login');
+		localStorage.removeItem('token');
+		dispatch(fetchLogout(userToken));
 	};
 
 	const loginInfo = (

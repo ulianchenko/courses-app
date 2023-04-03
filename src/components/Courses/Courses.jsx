@@ -7,13 +7,14 @@ import Button from '../../common/Button';
 import CourseCard from './components/CourseCard/CourseCard';
 
 import { buttonText } from '../../constants';
-import { getACoursesList, getAuthorsList } from '../../selectors';
+import { getCoursesList, getAuthorsList, getUserRole } from '../../selectors';
 
 import './courses.scss';
 
 const Courses = () => {
-	const coursesList = useSelector(getACoursesList);
+	const coursesList = useSelector(getCoursesList);
 	const authorsList = useSelector(getAuthorsList);
+	const userRole = useSelector(getUserRole);
 	const [filteredCoursesList, setFilteredCoursesList] = useState([]);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -48,10 +49,12 @@ const Courses = () => {
 		<section className='courses'>
 			<div className='courses-interface'>
 				<SearchBar onSearch={handleSearch} />
-				<Button
-					buttonText={buttonText.addNewCourse}
-					onClick={handleClickAddNewCourse}
-				/>
+				{userRole === 'admin' ? (
+					<Button
+						buttonText={buttonText.addNewCourse}
+						onClick={handleClickAddNewCourse}
+					/>
+				) : null}
 			</div>
 			<ul className='courses-cards'>{cards}</ul>
 		</section>
