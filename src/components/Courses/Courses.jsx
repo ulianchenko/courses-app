@@ -17,7 +17,6 @@ const Courses = () => {
 	const userRole = useSelector(getUserRole);
 	const [filteredCoursesList, setFilteredCoursesList] = useState([]);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => setFilteredCoursesList(coursesList), [coursesList]);
 
 	const navigate = useNavigate();

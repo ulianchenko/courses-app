@@ -75,29 +75,39 @@ const router = createBrowserRouter([
 function App() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const token = localStorage.getItem('token');
 
 	useEffect(
 		() => async () => {
+			const token = localStorage.getItem('token');
 			try {
-				const courses = await getCourses();
-				if (courses.successful) {
-					dispatch(coursesReceived(courses.result));
-				}
-
-				const authors = await getAuthors();
+				const authors = token ? await getAuthors() : null;
 				if (authors.successful) {
 					dispatch(authorsReceived(authors.result));
 				}
+			} catch (error) {}
 
-				if (token) {
-					dispatch(fetchUser(token));
-				} else navigate('/login');
+			try {
+				const courses = token ? await getCourses() : null;
+				if (courses.successful) {
+					dispatch(coursesReceived(courses.result));
+				}
 			} catch (error) {}
 		},
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[token]
+		[]
 	);
+
+	useEffect(
+		() => async () => {
+			const token = localStorage.getItem('token');
+			if (token) {
+				dispatch(fetchUser(token));
+			} else navigate('/login');
+		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[]
+	);
+
 	const href = useHref();
 
 	return (

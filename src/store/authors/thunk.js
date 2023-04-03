@@ -11,9 +11,7 @@ export const fetchAuthorAdd = (token, author) => async (dispatch, getState) => {
 				Authorization: token,
 			},
 		});
-		console.log(response);
 		const authorAdded = await response.json();
-		console.log('Response from POST author', authorAdded.result);
 		if (response.ok) {
 			dispatch(authorAdd(authorAdded.result));
 		} else throw new Error(authorAdded.errors);

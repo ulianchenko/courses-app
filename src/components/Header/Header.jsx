@@ -18,10 +18,10 @@ const Header = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const handleLogoutButton = () => {
-		navigate('/login');
+	const handleLogoutButton = async () => {
 		localStorage.removeItem('token');
 		dispatch(fetchLogout(userToken));
+		navigate('/login');
 	};
 
 	const loginInfo = (

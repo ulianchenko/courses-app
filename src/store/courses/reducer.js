@@ -2,7 +2,7 @@ import coursesActionTypes from './actionTypes';
 
 const coursesInitialState = [];
 
-const userReducer = (state = coursesInitialState, action) => {
+const coursesReducer = (state = coursesInitialState, action) => {
 	switch (action.type) {
 		case coursesActionTypes.COURSES_RECEIVED:
 			return [...action.payload];
@@ -24,4 +24,4 @@ const userReducer = (state = coursesInitialState, action) => {
 	}
 };
 
-export default userReducer;
+export default coursesReducer;
