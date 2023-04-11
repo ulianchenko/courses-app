@@ -24,6 +24,12 @@ const Courses = ({ onAddNewCourse }) => {
 							id.match(new RegExp(`${searchRequest}`, 'gi'))
 				  );
 		setFilteredCoursesList(courses);
+		setFilteredCourseist(courses);
+		setFilteredCourseist(courses);
+		setFilteredCourseist(courses);
+		setFilteredCourseist(courses);
+		setFilteredCourseist(courses);
+		setFilteredCourseist(courses);
 	};
 
 	const handleClickAddNewCourse = () => {
