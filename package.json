@@ -21,7 +21,14 @@
     "eslint:fix": "eslint --fix --ext .js --ext .jsx src",
     "test:nowatch": "react-scripts test --watchAll=false",
     "prepare": "husky install",
-    "prepublish": "npm run eslint:fix"
+    "prepublish": "npm run eslint:fix",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js. jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +58,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.3",
+    "lint-staged": "^13.2.1",
     "prettier": "^2.8.4",
     "sass": "^1.59.2"
   }
