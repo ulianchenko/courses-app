@@ -24,8 +24,13 @@
     "prepublish": "npm run eslint:fix",
     "precommit": "lint-staged"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
-    "*.js. jsx": "eslint"
+    "*.{js, jsx}": ["eslint"]
   },
   "eslintConfig": {
     "extends": [
