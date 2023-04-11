@@ -29,6 +29,7 @@ const Courses = ({ onAddNewCourse }) => {
 		setFilteredCoursesListErrorIsHereErrorIsHere(courses);
 		setFilteredCoursesListErrorIsHereErrorIsHere(courses);
 		setFilteredCoursesListErrorIsHereErrorIsHere(courses);
+		setFilteredCoursesListErrorIsHereErrorIsHere(courses);
 	};
 
 	const handleClickAddNewCourse = () => {
