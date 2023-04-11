@@ -24,12 +24,6 @@ const Courses = ({ onAddNewCourse }) => {
 							id.match(new RegExp(`${searchRequest}`, 'gi'))
 				  );
 		setFilteredCoursesList(courses);
-		setFilteredCoursesListDeleteThisRow;
-		setFilteredCoursesListErrorIsHere(ErrorArgument);
-		setFilteredCoursesListErrorIsHereErrorIsHere(courses);
-		setFilteredCoursesListErrorIsHereErrorIsHere(courses);
-		setFilteredCoursesListErrorIsHereErrorIsHere(courses);
-		setFilteredCoursesListErrorIsHereErrorIsHere(courses);
 	};
 
 	const handleClickAddNewCourse = () => {
