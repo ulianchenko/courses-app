@@ -5,10 +5,8 @@ import {
 	durationSettings,
 	infoSettings,
 } from '../../../../constants';
-import createAuthorsStr from '../../../../helpers/createAuthorsStr';
-import pipeDuration from '../../../../helpers/pipeDuration';
 
-import './courseCard.scss';
+import './CourseCard.scss';
 
 const CourseCard = ({
 	title,
@@ -16,10 +14,7 @@ const CourseCard = ({
 	creationDate,
 	description,
 	authors,
-	mockedAuthorsList,
 }) => {
-	const authorsStr = createAuthorsStr(authors, mockedAuthorsList);
-	const durationStr = pipeDuration(duration, durationSettings);
 	return (
 		<li className='card'>
 			<div className='card-text'>
@@ -28,11 +23,11 @@ const CourseCard = ({
 			</div>
 			<div className='card-info'>
 				<p className='card-info__authors'>
-					<b>{infoSettings.authors}</b> {authorsStr}
+					<b>{infoSettings.authors}</b> {authors}
 				</p>
 				<p className='card-info__duration'>
 					<b>{durationSettings.duration}</b>
-					{` ${durationStr}  ${durationSettings.hours}`}
+					{` ${duration}  ${durationSettings.hours}`}
 				</p>
 				<p className='card-info__created'>
 					<b>{infoSettings.created}</b> {creationDate.replace(/\//g, '.')}

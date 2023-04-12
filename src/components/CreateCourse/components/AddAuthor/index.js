@@ -1,3 +1,1 @@
-import AddAuthor from './AddAuthor';
-
-export default AddAuthor;
+export { default } from './AddAuthor';

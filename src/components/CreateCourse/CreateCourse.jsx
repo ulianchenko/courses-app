@@ -15,7 +15,7 @@ import {
 } from '../../constants';
 import dateGenerator from '../../helpers/dateGenerator';
 
-import './createCourse.scss';
+import './CreateCourse.scss';
 
 const CreateCourse = ({ onShowCourses }) => {
 	const [authorName, setAuthorName] = useState('');

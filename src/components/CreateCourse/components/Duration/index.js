@@ -1,3 +1,1 @@
-import Duration from './Duration';
-
-export default Duration;
+export { default } from './Duration';

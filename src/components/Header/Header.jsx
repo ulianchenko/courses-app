@@ -2,7 +2,7 @@ import Logo from './components/Logo';
 import Button from '../../common/Button';
 import { buttonText } from '../../constants';
 
-import './header.scss';
+import './Header.scss';
 
 const Header = () => {
 	return (

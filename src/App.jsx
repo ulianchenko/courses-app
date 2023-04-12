@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 import Header from './components/Header';
-import Courses from './components/Courses/Courses';
-import CreateCourse from './components/CreateCourse/CreateCourse';
+import Courses from './components/Courses';
+import CreateCourse from './components/CreateCourse';
 
-import './app.scss';
+import './App.scss';
 
 function App() {
 	const [openAddNewCourse, setOpenAddNewCourse] = useState(false);

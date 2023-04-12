@@ -7,7 +7,7 @@ import {
 } from '../../../../constants';
 import validateInput from '../../../../helpers/validateInput';
 
-import './description.scss';
+import './Description.scss';
 
 const Description = ({ courseDescription, handleChangeCourseDescription }) => {
 	const [focused, setFocused] = useState(false);

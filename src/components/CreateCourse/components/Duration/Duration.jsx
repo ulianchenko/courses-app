@@ -10,7 +10,7 @@ import {
 import pipeDuration from '../../../../helpers/pipeDuration';
 import validateInput from '../../../../helpers/validateInput';
 
-import './duration.scss';
+import './Duration.scss';
 
 const Duration = ({ courseDuration, handleChangeCourseDuration }) => {
 	const durationStr = pipeDuration(courseDuration, durationSettings);

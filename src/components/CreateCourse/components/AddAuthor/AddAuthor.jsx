@@ -12,7 +12,7 @@ import {
 } from '../../../../constants';
 import validateInput from '../../../../helpers/validateInput';
 
-import './addAuthor.scss';
+import './AddAuthor.scss';
 
 const AddAuthor = ({
 	authorName,

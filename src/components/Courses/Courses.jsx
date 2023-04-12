@@ -4,15 +4,15 @@ import SearchBar from './components/SearchBar';
 import Button from '../../common/Button';
 import CourseCard from './components/CourseCard/CourseCard';
 
-import { buttonText } from '../../constants';
+import formatCoursesList from '../../helpers/formatCoursesList';
+import { mockedCoursesList, buttonText } from '../../constants';
 
-import { mockedCoursesList, mockedAuthorsList } from '../../constants';
-
-import './courses.scss';
+import './Courses.scss';
 
 const Courses = ({ onAddNewCourse }) => {
-	const [filteredCoursesList, setFilteredCoursesList] =
-		useState(mockedCoursesList);
+	const [filteredCoursesList, setFilteredCoursesList] = useState(
+		formatCoursesList(mockedCoursesList)
+	);
 
 	const handleSearch = (searchRequest) => {
 		const courses =
@@ -23,13 +23,7 @@ const Courses = ({ onAddNewCourse }) => {
 							title.match(new RegExp(`${searchRequest}`, 'gi')) ||
 							id.match(new RegExp(`${searchRequest}`, 'gi'))
 				  );
-		setFilteredCoursesList(courses);
-		setFilteredCourseist(courses);
-		setFilteredCourseist(courses);
-		setFilteredCourseist(courses);
-		setFilteredCourseist(courses);
-		setFilteredCourseist(courses);
-		setFilteredCourseist(courses);
+		setFilteredCoursesList(formatCoursesList(courses));
 	};
 
 	const handleClickAddNewCourse = () => {
@@ -37,7 +31,7 @@ const Courses = ({ onAddNewCourse }) => {
 	};
 
 	const cards = filteredCoursesList.map(({ id, ...props }) => (
-		<CourseCard key={id} {...props} mockedAuthorsList={mockedAuthorsList} />
+		<CourseCard key={id} {...props} />
 	));
 
 	return (
