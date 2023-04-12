@@ -10,7 +10,7 @@ import {
 import createAuthorsStr from '../../../../helpers/createAuthorsStr';
 import pipeDuration from '../../../../helpers/pipeDuration';
 
-import './courseCard.scss';
+import './CourseCard.scss';
 
 const CourseCard = ({
 	id,

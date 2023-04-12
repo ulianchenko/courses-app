@@ -1,3 +1,1 @@
-import AuthorsList from './AuthorsList';
-
-export default AuthorsList;
+export { default } from './AuthorsList';

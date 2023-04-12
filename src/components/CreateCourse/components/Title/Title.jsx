@@ -11,7 +11,7 @@ import {
 } from '../../../../constants';
 import validateInput from '../../../../helpers/validateInput';
 
-import './title.scss';
+import './Title.scss';
 
 const Title = ({
 	courseTitle,

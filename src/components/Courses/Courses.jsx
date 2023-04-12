@@ -9,7 +9,7 @@ import { buttonText } from '../../constants';
 
 import { mockedCoursesList, mockedAuthorsList } from '../../constants';
 
-import './courses.scss';
+import './Courses.scss';
 
 const Courses = () => {
 	const [filteredCoursesList, setFilteredCoursesList] =

@@ -13,7 +13,7 @@ import Login from './components/Login';
 import CourseInfo from './components/CourseInfo';
 import Error from './components/Error';
 
-import './app.scss';
+import './App.scss';
 
 const router = createBrowserRouter([
 	{

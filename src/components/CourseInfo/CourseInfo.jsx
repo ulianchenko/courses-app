@@ -10,7 +10,7 @@ import {
 import createAuthorsStr from '../../helpers/createAuthorsStr';
 import pipeDuration from '../../helpers/pipeDuration';
 
-import './courseInfo.scss';
+import './CourseInfo.scss';
 
 const CourseInfo = () => {
 	const { courseId } = useParams();

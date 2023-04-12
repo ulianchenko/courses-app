@@ -14,7 +14,7 @@ import {
 	loginSettings,
 } from '../../constants';
 
-import './login.scss';
+import './Login.scss';
 
 const Login = () => {
 	const [email, setEmail] = useState('');

@@ -17,7 +17,7 @@ import {
 import dateGenerator from '../../helpers/dateGenerator';
 import validateInput from '../../helpers/validateInput';
 
-import './createCourse.scss';
+import './CreateCourse.scss';
 
 const CreateCourse = () => {
 	const [authorName, setAuthorName] = useState('');
