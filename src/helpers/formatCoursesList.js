@@ -1,12 +1,10 @@
 import createAuthorsStr from './createAuthorsStr';
 import pipeDuration from './pipeDuration';
 
-import { mockedAuthorsList, durationSettings } from '../constants';
-
-const formatCoursesList = (coursesList) => {
+const formatCoursesList = (coursesList, allAuthorsList, durationSettings) => {
 	return coursesList.map((course) => ({
 		...course,
-		authors: createAuthorsStr(course.authors, mockedAuthorsList),
+		authors: createAuthorsStr(course.authors, allAuthorsList),
 		duration: pipeDuration(course.duration, durationSettings),
 	}));
 };
