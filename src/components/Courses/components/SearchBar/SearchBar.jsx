@@ -5,7 +5,7 @@ import Button from '../../../../common/Button';
 
 import { buttonText, placeholderText } from '../../../../constants';
 
-import './searchBar.scss';
+import './SearchBar.scss';
 
 const SearchBar = ({ onSearch }) => {
 	const [inputValue, setInputValue] = useState('');

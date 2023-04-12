@@ -1,4 +1,4 @@
-import './error.scss';
+import './Error.scss';
 
 const Error = () => {
 	return (

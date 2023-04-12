@@ -21,7 +21,7 @@ import { coursesReceived } from './store/courses/actionCreators';
 import { authorsReceived } from './store/authors/actionCreators';
 import { userLogin } from './store/user/actionCreators';
 
-import './app.scss';
+import './App.scss';
 
 const router = createBrowserRouter([
 	{

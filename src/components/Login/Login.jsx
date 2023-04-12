@@ -16,7 +16,7 @@ import {
 } from '../../constants';
 import { userLogin } from '../../store/user/actionCreators';
 
-import './login.scss';
+import './Login.scss';
 
 const Login = () => {
 	const [email, setEmail] = useState('');

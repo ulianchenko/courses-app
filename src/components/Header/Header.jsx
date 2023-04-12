@@ -9,7 +9,7 @@ import { buttonText } from '../../constants';
 import { userLogout } from '../../store/user/actionCreators';
 import { getLoggedIn, getUserName } from '../../selectors';
 
-import './header.scss';
+import './Header.scss';
 
 const Header = () => {
 	const loggedIn = useSelector(getLoggedIn);

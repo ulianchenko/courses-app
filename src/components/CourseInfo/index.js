@@ -1,3 +1,1 @@
-import CourseInfo from './CourseInfo';
-
-export default CourseInfo;
+export { default } from './CourseInfo';

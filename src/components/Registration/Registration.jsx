@@ -14,7 +14,7 @@ import {
 	registrationSettings,
 } from '../../constants';
 
-import './registration.scss';
+import './Registration.scss';
 
 const Registration = () => {
 	const [name, setName] = useState('');

@@ -17,7 +17,7 @@ import { courseAdd } from '../../store/courses/actionCreators';
 import { authorAdd } from '../../store/authors/actionCreators';
 import { getAuthorsList } from '../../selectors';
 
-import './createCourse.scss';
+import './CreateCourse.scss';
 
 const CreateCourse = () => {
 	const authorsList = useSelector(getAuthorsList);

@@ -1,25 +1,32 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import SearchBar from './components/SearchBar';
 import Button from '../../common/Button';
 import CourseCard from './components/CourseCard/CourseCard';
 
-import { buttonText } from '../../constants';
+import { courseRemove } from '../../store/courses/actionCreators';
 import { getACoursesList, getAuthorsList } from '../../selectors';
+import formatCoursesList from '../../helpers/formatCoursesList';
+import { buttonText } from '../../constants';
 
-import './courses.scss';
+import './Courses.scss';
 
 const Courses = () => {
 	const coursesList = useSelector(getACoursesList);
-	const authorsList = useSelector(getAuthorsList);
+	const allAuthorsList = useSelector(getAuthorsList);
 	const [filteredCoursesList, setFilteredCoursesList] = useState([]);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => setFilteredCoursesList(coursesList), [coursesList]);
+	useEffect(
+		() =>
+			setFilteredCoursesList(formatCoursesList(coursesList, allAuthorsList)),
+		[coursesList, allAuthorsList]
+	);
 
 	const navigate = useNavigate();
+
+	const dispatch = useDispatch();
 
 	const handleSearch = (searchRequest) => {
 		const searchCourses =
@@ -30,18 +37,32 @@ const Courses = () => {
 							title.match(new RegExp(`${searchRequest}`, 'gi')) ||
 							id.match(new RegExp(`${searchRequest}`, 'gi'))
 				  );
-		setFilteredCoursesList(searchCourses);
+		setFilteredCoursesList(formatCoursesList(searchCourses, allAuthorsList));
 	};
 
 	const handleClickAddNewCourse = () => {
 		navigate('/courses/add');
 	};
 
+	const handleShowCourse = (id) => {
+		navigate(`/courses/${id}`);
+	};
+
+	const handleRemoveCourse = (id) => {
+		dispatch(courseRemove(id));
+	};
+
 	const cards =
 		filteredCoursesList.length === 0
 			? null
 			: filteredCoursesList.map(({ id, ...props }) => (
-					<CourseCard key={id} id={id} {...props} authorsList={authorsList} />
+					<CourseCard
+						key={id}
+						id={id}
+						{...props}
+						onShowCourse={handleShowCourse}
+						onRemoveCourse={handleRemoveCourse}
+					/>
 			  ));
 
 	return (

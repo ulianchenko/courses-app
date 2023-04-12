@@ -1,3 +1,1 @@
-import CourseAuthorsList from './CourseAuthorsList';
-
-export default CourseAuthorsList;
+export { default } from './CourseAuthorsList';
