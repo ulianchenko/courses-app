@@ -9,7 +9,7 @@ import CourseCard from './components/CourseCard/CourseCard';
 import { courseRemove } from '../../store/courses/actionCreators';
 import { getACoursesList, getAuthorsList } from '../../selectors';
 import formatCoursesList from '../../helpers/formatCoursesList';
-import { buttonText } from '../../constants';
+import { buttonText, durationSettings } from '../../constants';
 
 import './Courses.scss';
 
@@ -20,7 +20,9 @@ const Courses = () => {
 
 	useEffect(
 		() =>
-			setFilteredCoursesList(formatCoursesList(coursesList, allAuthorsList)),
+			setFilteredCoursesList(
+				formatCoursesList(coursesList, allAuthorsList, durationSettings)
+			),
 		[coursesList, allAuthorsList]
 	);
 
@@ -37,7 +39,9 @@ const Courses = () => {
 							title.match(new RegExp(`${searchRequest}`, 'gi')) ||
 							id.match(new RegExp(`${searchRequest}`, 'gi'))
 				  );
-		setFilteredCoursesList(formatCoursesList(searchCourses, allAuthorsList));
+		setFilteredCoursesList(
+			formatCoursesList(searchCourses, allAuthorsList, durationSettings)
+		);
 	};
 
 	const handleClickAddNewCourse = () => {

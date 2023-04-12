@@ -1,9 +1,7 @@
 import createAuthorsStr from './createAuthorsStr';
 import pipeDuration from './pipeDuration';
 
-import { durationSettings } from '../constants';
-
-const formatCoursesList = (coursesList, allAutorsList) => {
+const formatCoursesList = (coursesList, allAutorsList, durationSettings) => {
 	return coursesList.map((course) => ({
 		...course,
 		authors: createAuthorsStr(course.authors, allAutorsList),
