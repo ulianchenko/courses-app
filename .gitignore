@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+#server
+/courses-app-backend-master
+
 # testing
 /coverage
 
