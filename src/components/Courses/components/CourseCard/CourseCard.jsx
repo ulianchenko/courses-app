@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import Button from '../../../../common/Button';
 
 import {
@@ -17,12 +15,8 @@ const CourseCard = ({
 	creationDate,
 	description,
 	authors,
+	onShowCourse,
 }) => {
-	const navigate = useNavigate();
-
-	const handleShowCourse = () => {
-		navigate(`/courses/${id}`);
-	};
 	return (
 		<li className='card'>
 			<div className='card-text'>
@@ -43,7 +37,7 @@ const CourseCard = ({
 				<div className='card-info__button'>
 					<Button
 						buttonText={buttonText.showCourse}
-						onClick={handleShowCourse}
+						onClick={() => onShowCourse(id)}
 					/>
 				</div>
 			</div>

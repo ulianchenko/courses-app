@@ -119,6 +119,12 @@ const infoSettings = {
 	id: 'ID:',
 };
 
+const errorSettings = {
+	title: 'OOOPS!',
+	text: 'Sorry, an unexpected error has occured',
+	linkText: '< Back to courses',
+};
+
 const validateText = {
 	title: 'Title name should contain at least 2 characters',
 	description: 'Description text should contain at least 2 characters',
@@ -127,6 +133,15 @@ const validateText = {
 	allFields: 'Please, filled in all fields',
 	invalidLoginPassword: 'Invalid login or password',
 	invalidRegistrationData: 'Invalid registration data',
+};
+
+const urls = {
+	home: '/',
+	courses: '/courses',
+	addCourse: '/courses/add',
+	login: '/login',
+	registration: '/registration',
+	courseId: '/courses/:courseId',
 };
 
 export {
@@ -138,9 +153,11 @@ export {
 	titleText,
 	durationSettings,
 	infoSettings,
+	errorSettings,
 	paragraphText,
 	validateText,
 	registrationSettings,
 	loginSettings,
 	courseInfoSettings,
+	urls,
 };

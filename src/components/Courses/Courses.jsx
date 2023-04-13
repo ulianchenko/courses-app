@@ -11,6 +11,7 @@ import {
 	mockedAuthorsList,
 	durationSettings,
 	buttonText,
+	urls,
 } from '../../constants';
 
 import './Courses.scss';
@@ -36,12 +37,16 @@ const Courses = () => {
 		);
 	};
 
+	const handleShowCourse = (id) => {
+		navigate(`${urls.courses}/${id}`);
+	};
+
 	const handleClickAddNewCourse = () => {
-		navigate('/courses/add');
+		navigate(urls.addCourse);
 	};
 
 	const cards = filteredCoursesList.map(({ id, ...props }) => (
-		<CourseCard key={id} id={id} {...props} />
+		<CourseCard key={id} id={id} {...props} onShowCourse={handleShowCourse} />
 	));
 
 	return (

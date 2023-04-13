@@ -12,6 +12,7 @@ import {
 	labelText,
 	buttonText,
 	loginSettings,
+	urls,
 } from '../../constants';
 
 import './Login.scss';
@@ -48,7 +49,7 @@ const Login = () => {
 			const result = await response.json();
 			if (response.ok) {
 				localStorage.setItem('token', JSON.stringify(result));
-				navigate('/courses');
+				navigate(urls.courses);
 			} else {
 				const responseErrors = result.errors ?? [result.result];
 				setBadResponse(responseErrors);
@@ -88,7 +89,7 @@ const Login = () => {
 					</div>
 					<p className='login-form__text'>
 						{loginSettings.info}{' '}
-						<Link to={'/registration'}>{loginSettings.register}</Link>
+						<Link to={urls.registration}>{loginSettings.register}</Link>
 					</p>
 				</form>
 				{badResponse.length > 0 ? (

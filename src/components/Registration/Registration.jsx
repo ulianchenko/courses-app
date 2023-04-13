@@ -12,6 +12,7 @@ import {
 	labelText,
 	buttonText,
 	registrationSettings,
+	urls,
 } from '../../constants';
 
 import './Registration.scss';
@@ -53,7 +54,7 @@ const Registration = () => {
 			});
 			const result = await response.json();
 			if (response.ok) {
-				navigate('/login');
+				navigate(urls.login);
 			} else {
 				setBadResponse(result.errors);
 				throw Error(response.statusText);
@@ -68,7 +69,7 @@ const Registration = () => {
 
 	return (
 		<div className='container'>
-			<Header showLoginInfo={false} />
+			<Header />
 			<section className='registration'>
 				<form className={registrationClassName} onSubmit={handleSubmit}>
 					<h3 className='registration-form__title'>{titleText.registration}</h3>
@@ -102,7 +103,7 @@ const Registration = () => {
 					</div>
 					<p className='registration-form__text'>
 						{registrationSettings.info}{' '}
-						<Link to={'/login'}>{registrationSettings.login}</Link>
+						<Link to={urls.login}>{registrationSettings.login}</Link>
 					</p>
 				</form>
 				{badResponse.length > 0 ? (

@@ -13,6 +13,7 @@ import {
 	mockedCoursesList,
 	mockedAuthorsList,
 	validateText,
+	urls,
 } from '../../constants';
 import dateGenerator from '../../helpers/dateGenerator';
 import validateInput from '../../helpers/validateInput';
@@ -54,7 +55,7 @@ const CreateCourse = () => {
 
 		mockedCoursesList.push(newCourse);
 
-		navigate('/courses');
+		navigate(urls.courses);
 	};
 
 	const handleChangeCourseTitle = ({ target }) => {
@@ -77,8 +78,6 @@ const CreateCourse = () => {
 	};
 
 	const handleChangeCourseDuration = ({ target }) => {
-		// const duration = !!Number(target.value) ? target.value : '';
-		// setCourseDuration(duration);
 		setCourseDuration(target.value);
 	};
 
