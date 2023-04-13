@@ -5,13 +5,18 @@ import Button from '../../common/Button';
 import CourseCard from './components/CourseCard/CourseCard';
 
 import formatCoursesList from '../../helpers/formatCoursesList';
-import { mockedCoursesList, buttonText } from '../../constants';
+import {
+	mockedCoursesList,
+	mockedAuthorsList,
+	durationSettings,
+	buttonText,
+} from '../../constants';
 
 import './Courses.scss';
 
 const Courses = ({ onAddNewCourse }) => {
 	const [filteredCoursesList, setFilteredCoursesList] = useState(
-		formatCoursesList(mockedCoursesList)
+		formatCoursesList(mockedCoursesList, mockedAuthorsList, durationSettings)
 	);
 
 	const handleSearch = (searchRequest) => {
@@ -23,7 +28,9 @@ const Courses = ({ onAddNewCourse }) => {
 							title.match(new RegExp(`${searchRequest}`, 'gi')) ||
 							id.match(new RegExp(`${searchRequest}`, 'gi'))
 				  );
-		setFilteredCoursesList(formatCoursesList(courses));
+		setFilteredCoursesList(
+			formatCoursesList(courses, mockedAuthorsList, durationSettings)
+		);
 	};
 
 	const handleClickAddNewCourse = () => {
