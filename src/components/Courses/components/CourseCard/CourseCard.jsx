@@ -22,7 +22,6 @@ const CourseCard = ({
 
 	const handleShowCourse = () => {
 		navigate(`/courses/${id}`);
-		console.log('navigate');
 	};
 	return (
 		<li className='card'>
