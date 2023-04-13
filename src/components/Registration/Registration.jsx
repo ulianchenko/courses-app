@@ -23,6 +23,7 @@ const Registration = () => {
 	const [badResponse, setBadResponse] = useState([]);
 
 	const navigate = useNavigate();
+	console.log('registration');
 
 	const handleChangeName = ({ target }) => {
 		setName(target.value);
