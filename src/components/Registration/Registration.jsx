@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import classNames from 'classnames';
 
 import Header from '../Header';
 import Input from '../../common/Input';
@@ -61,16 +62,22 @@ const Registration = () => {
 		} catch (error) {}
 	};
 
-	const registrationClassName =
-		badResponse.length > 0
-			? 'registration-form badResponse'
-			: 'registration-form';
+	// const registrationClassName =
+	// 	badResponse.length > 0
+	// 		? 'registration-form badResponse'
+	// 		: 'registration-form';
 
 	return (
 		<div className='container'>
 			<Header showLoginInfo={false} />
 			<section className='registration'>
-				<form className={registrationClassName} onSubmit={handleSubmit}>
+				<form
+					className={classNames(
+						'registration-form',
+						badResponse.length > 0 && 'badResponse'
+					)}
+					onSubmit={handleSubmit}
+				>
 					<h3 className='registration-form__title'>{titleText.registration}</h3>
 					<div className='registration-form__input'>
 						<Input

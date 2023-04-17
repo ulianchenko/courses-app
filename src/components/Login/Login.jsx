@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import classNames from 'classnames';
 
 import Header from '../Header';
 import Input from '../../common/Input';
@@ -62,14 +63,20 @@ const Login = () => {
 		} catch (error) {}
 	};
 
-	const formClassName =
-		badResponse.length > 0 ? 'login-form badResponse' : 'login-form';
+	// const formClassName =
+	// 	badResponse.length > 0 ? 'login-form badResponse' : 'login-form';
 
 	return (
 		<div className='container'>
 			<Header />
 			<section className='login'>
-				<form className={formClassName} onSubmit={handleSubmit}>
+				<form
+					className={classNames(
+						'login-form',
+						badResponse.length > 0 && 'badResponse'
+					)}
+					onSubmit={handleSubmit}
+				>
 					<h3 className='login-form__title'>{titleText.login}</h3>
 					<div className='login-form__input'>
 						<Input

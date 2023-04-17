@@ -2,7 +2,7 @@ import authorsActionTypes from './actionTypes';
 
 const authorsInitialState = [];
 
-const userReducer = (state = authorsInitialState, action) => {
+const authorsReducer = (state = authorsInitialState, action) => {
 	switch (action.type) {
 		case authorsActionTypes.AUTHORS_RECEIVED:
 			return [...action.payload];
@@ -13,4 +13,4 @@ const userReducer = (state = authorsInitialState, action) => {
 	}
 };
 
-export default userReducer;
+export default authorsReducer;
