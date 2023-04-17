@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 
 import Header from './components/Header';
@@ -13,14 +14,16 @@ function App() {
 	const handleShowCourses = () => setOpenAddNewCourse(false);
 
 	return (
-		<div className='container'>
-			<Header />
-			{openAddNewCourse ? (
-				<CreateCourse onShowCourses={handleShowCourses} />
-			) : (
-				<Courses onAddNewCourse={handleAddNewCourse} />
-			)}
-		</div>
+		<React.StrictMode>
+			<div className='container'>
+				<Header />
+				{openAddNewCourse ? (
+					<CreateCourse onShowCourses={handleShowCourses} />
+				) : (
+					<Courses onAddNewCourse={handleAddNewCourse} />
+				)}
+			</div>
+		</React.StrictMode>
 	);
 }
 
