@@ -21,7 +21,6 @@ const Duration = ({ courseDuration, handleChangeCourseDuration }) => {
 		courseDuration.length > 0
 			? validateInput(courseDuration).isNumbersOnly().isMoreThanZero().isValid()
 			: true;
-	// const className = valid ? 'duration-input' : 'duration-input invalid';
 
 	return (
 		<div className='duration'>

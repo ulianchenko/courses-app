@@ -34,8 +34,6 @@ const AddAuthor = ({
 		authorName.length > 0
 			? validateInput(authorName).minLength(2).isValid()
 			: true;
-	// const className =
-	// 	valid || focused ? 'addAuthor-input' : 'addAuthor-input invalid';
 
 	return (
 		<div className='addAuthor'>

@@ -33,7 +33,6 @@ const Title = ({
 		courseTitle.length > 0
 			? validateInput(courseTitle).minLength(2).isValid()
 			: true;
-	// const className = valid || focused ? 'title-input' : 'title-input invalid';
 
 	return (
 		<div className='title'>
