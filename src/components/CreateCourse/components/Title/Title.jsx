@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import classNames from 'classnames';
 
 import Input from '../../../../common/Input';
 import Button from '../../../../common/Button';
@@ -32,11 +33,13 @@ const Title = ({
 		courseTitle.length > 0
 			? validateInput(courseTitle).minLength(2).isValid()
 			: true;
-	const className = valid || focused ? 'title-input' : 'title-input invalid';
+	// const className = valid || focused ? 'title-input' : 'title-input invalid';
 
 	return (
 		<div className='title'>
-			<div className={className}>
+			<div
+				className={classNames('title-input', !valid && !focused && 'invalid')}
+			>
 				<Input
 					onChange={handleChangeCourseTitle}
 					value={courseTitle}
