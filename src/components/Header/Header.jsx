@@ -20,7 +20,6 @@ const Header = () => {
 	const navigate = useNavigate();
 
 	const handleLogoutButton = () => {
-		localStorage.removeItem('token');
 		dispatch(userLogout());
 		navigate('/login');
 	};

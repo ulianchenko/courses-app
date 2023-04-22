@@ -13,4 +13,11 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, composeWithDevToolsDevelopmentOnly());
 
+store.subscribe(() => {
+	const token = store.getState().user.token;
+	if (!token) {
+		localStorage.removeItem('token');
+	}
+});
+
 export default store;

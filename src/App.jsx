@@ -68,23 +68,26 @@ function App() {
 	const dispatch = useDispatch();
 
 	useEffect(
-		() => async () => {
-			try {
-				const courses = await getCourses();
-				if (courses.successful) {
-					dispatch(coursesReceived(courses.result));
-				}
+		() => {
+			const fetchInitialData = async () => {
+				try {
+					const courses = await getCourses();
+					if (courses.successful) {
+						dispatch(coursesReceived(courses.result));
+					}
 
-				const authors = await getAuthors();
-				if (authors.successful) {
-					dispatch(authorsReceived(authors.result));
-				}
+					const authors = await getAuthors();
+					if (authors.successful) {
+						dispatch(authorsReceived(authors.result));
+					}
 
-				if (localStorage.getItem('token')) {
-					const token = localStorage.getItem('token');
-					dispatch(userLogin(JSON.parse(token)));
-				}
-			} catch (error) {}
+					if (localStorage.getItem('token')) {
+						const token = localStorage.getItem('token');
+						dispatch(userLogin(JSON.parse(token)));
+					}
+				} catch (error) {}
+			};
+			fetchInitialData();
 		},
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[]

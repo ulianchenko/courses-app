@@ -63,9 +63,6 @@ const Login = () => {
 		} catch (error) {}
 	};
 
-	// const formClassName =
-	// 	badResponse.length > 0 ? 'login-form badResponse' : 'login-form';
-
 	return (
 		<div className='container'>
 			<Header />
