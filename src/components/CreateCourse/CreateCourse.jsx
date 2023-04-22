@@ -10,12 +10,12 @@ import Duration from './components/Duration/Duration';
 import AuthorsList from './components/AuthorsList/AuthorsList';
 import CourseAuthorsList from './components/CourseAuthorsList';
 
-import { validateText } from '../../constants';
-import dateGenerator from '../../helpers/dateGenerator';
-import validateInput from '../../helpers/validateInput';
 import { courseAdd } from '../../store/courses/actionCreators';
 import { authorAdd } from '../../store/authors/actionCreators';
 import { getAuthorsList } from '../../selectors';
+import dateGenerator from '../../helpers/dateGenerator';
+import validateInput from '../../helpers/validateInput';
+import { validateText, urls } from '../../constants';
 
 import './CreateCourse.scss';
 
@@ -60,7 +60,7 @@ const CreateCourse = () => {
 
 		dispatch(courseAdd(newCourse));
 
-		navigate('/courses');
+		navigate(urls.courses);
 	};
 
 	const handleChangeCourseTitle = ({ target }) => {

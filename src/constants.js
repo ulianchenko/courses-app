@@ -119,6 +119,12 @@ const infoSettings = {
 	id: 'ID:',
 };
 
+const errorSettings = {
+	title: 'OOOPS!',
+	text: 'Sorry, an unexpected error has occured',
+	linkText: '< Back to courses',
+};
+
 const validateText = {
 	title: 'Title name should contain at least 2 characters',
 	description: 'Description text should contain at least 2 characters',
@@ -135,6 +141,15 @@ const http = {
 	authors: '/authors/all',
 };
 
+const urls = {
+	home: '/',
+	courses: '/courses',
+	addCourse: '/courses/add',
+	login: '/login',
+	registration: '/registration',
+	courseId: '/courses/:courseId',
+};
+
 export {
 	mockedCoursesList,
 	mockedAuthorsList,
@@ -144,10 +159,12 @@ export {
 	titleText,
 	durationSettings,
 	infoSettings,
+	errorSettings,
 	paragraphText,
 	validateText,
 	registrationSettings,
 	loginSettings,
 	courseInfoSettings,
 	http,
+	urls,
 };

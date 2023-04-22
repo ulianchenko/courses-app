@@ -14,6 +14,7 @@ import {
 	labelText,
 	buttonText,
 	loginSettings,
+	urls,
 } from '../../constants';
 import { userLogin } from '../../store/user/actionCreators';
 
@@ -54,7 +55,7 @@ const Login = () => {
 			if (response.ok) {
 				localStorage.setItem('token', JSON.stringify(result));
 				dispatch(userLogin(result));
-				navigate('/courses');
+				navigate(urls.courses);
 			} else {
 				const responseErrors = result.errors ?? [result.result];
 				setBadResponse(responseErrors);
@@ -97,7 +98,7 @@ const Login = () => {
 					</div>
 					<p className='login-form__text'>
 						{loginSettings.info}{' '}
-						<Link to={'/registration'}>{loginSettings.register}</Link>
+						<Link to={urls.registration}>{loginSettings.register}</Link>
 					</p>
 				</form>
 				{badResponse.length > 0 ? (

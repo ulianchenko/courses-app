@@ -24,8 +24,6 @@ const Description = ({ courseDescription, handleChangeCourseDescription }) => {
 		courseDescription.length > 0
 			? validateInput(courseDescription).minLength(2).isValid()
 			: true;
-	// const className =
-	// 	valid || focused ? 'description-textarea' : 'description-textarea invalid';
 
 	return (
 		<div className='description'>

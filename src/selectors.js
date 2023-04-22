@@ -4,4 +4,4 @@ export const getLoggedIn = (state) => state.user.isAuth;
 
 export const getAuthorsList = (state) => state.authors;
 
-export const getACoursesList = (state) => state.courses;
+export const getCoursesList = (state) => state.courses;

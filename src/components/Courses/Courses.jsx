@@ -7,14 +7,14 @@ import Button from '../../common/Button';
 import CourseCard from './components/CourseCard/CourseCard';
 
 import { courseRemove } from '../../store/courses/actionCreators';
-import { getACoursesList, getAuthorsList } from '../../selectors';
+import { getCoursesList, getAuthorsList } from '../../selectors';
 import formatCoursesList from '../../helpers/formatCoursesList';
-import { buttonText, durationSettings } from '../../constants';
+import { buttonText, durationSettings, urls } from '../../constants';
 
 import './Courses.scss';
 
 const Courses = () => {
-	const coursesList = useSelector(getACoursesList);
+	const coursesList = useSelector(getCoursesList);
 	const allAuthorsList = useSelector(getAuthorsList);
 	const [filteredCoursesList, setFilteredCoursesList] = useState([]);
 
@@ -45,11 +45,11 @@ const Courses = () => {
 	};
 
 	const handleClickAddNewCourse = () => {
-		navigate('/courses/add');
+		navigate(urls.addCourse);
 	};
 
 	const handleShowCourse = (id) => {
-		navigate(`/courses/${id}`);
+		navigate(`${urls.courses}/${id}`);
 	};
 
 	const handleRemoveCourse = (id) => {

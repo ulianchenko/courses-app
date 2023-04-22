@@ -13,6 +13,7 @@ import {
 	labelText,
 	buttonText,
 	registrationSettings,
+	urls,
 } from '../../constants';
 
 import './Registration.scss';
@@ -54,18 +55,13 @@ const Registration = () => {
 			});
 			const result = await response.json();
 			if (response.ok) {
-				navigate('/login');
+				navigate(urls.login);
 			} else {
 				setBadResponse(result.errors);
 				throw Error(response.statusText);
 			}
 		} catch (error) {}
 	};
-
-	// const registrationClassName =
-	// 	badResponse.length > 0
-	// 		? 'registration-form badResponse'
-	// 		: 'registration-form';
 
 	return (
 		<div className='container'>
@@ -109,7 +105,7 @@ const Registration = () => {
 					</div>
 					<p className='registration-form__text'>
 						{registrationSettings.info}{' '}
-						<Link to={'/login'}>{registrationSettings.login}</Link>
+						<Link to={urls.login}>{registrationSettings.login}</Link>
 					</p>
 				</form>
 				{badResponse.length > 0 ? (
