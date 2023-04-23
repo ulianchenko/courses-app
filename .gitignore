@@ -5,11 +5,11 @@
 /.pnp
 .pnp.js
 
-#server
-/courses-app-backend-master
-
 # testing
 /coverage
+
+#server
+/courses-app-backend-master
 
 # production
 /build
