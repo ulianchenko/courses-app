@@ -50,7 +50,6 @@ const Home = () => {
 	);
 
 	const handleLogoutButton = () => {
-		// localStorage.removeItem('token');
 		dispatch(userLogout());
 		navigate(urls.login);
 	};
