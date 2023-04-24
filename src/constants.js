@@ -147,7 +147,6 @@ const urls = {
 	addCourse: '/courses/add',
 	login: '/login',
 	registration: '/registration',
-	courseId: '/courses/:courseId',
 };
 
 export {

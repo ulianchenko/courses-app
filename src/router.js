@@ -28,7 +28,7 @@ const router = createBrowserRouter([
 				errorElement: <Error />,
 			},
 			{
-				path: urls.courseId,
+				path: `${urls.courses}/:courseId`,
 				element: <CourseInfo />,
 				errorElement: <Error />,
 			},
