@@ -1,23 +1,39 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import SearchBar from './components/SearchBar';
 import Button from '../../common/Button';
 import CourseCard from './components/CourseCard/CourseCard';
 
-import { buttonText } from '../../constants';
-import { getCoursesList, getAuthorsList, getUserRole } from '../../selectors';
+import { fetchCourseRemove } from '../../store/courses/thunk';
+import {
+	getCoursesList,
+	getAuthorsList,
+	getUserRole,
+	getUserToken,
+} from '../../selectors';
+import formatCoursesList from '../../helpers/formatCoursesList';
+import { buttonText, durationSettings, urls } from '../../constants';
 
-import './courses.scss';
+import './Courses.scss';
 
 const Courses = () => {
 	const coursesList = useSelector(getCoursesList);
-	const authorsList = useSelector(getAuthorsList);
+	const allAuthorsList = useSelector(getAuthorsList);
 	const userRole = useSelector(getUserRole);
+	const userToken = useSelector(getUserToken);
 	const [filteredCoursesList, setFilteredCoursesList] = useState([]);
 
-	useEffect(() => setFilteredCoursesList(coursesList), [coursesList]);
+	useEffect(
+		() =>
+			setFilteredCoursesList(
+				formatCoursesList(coursesList, allAuthorsList, durationSettings)
+			),
+		[coursesList, allAuthorsList]
+	);
+
+	const dispatch = useDispatch();
 
 	const navigate = useNavigate();
 
@@ -30,18 +46,49 @@ const Courses = () => {
 							title.match(new RegExp(`${searchRequest}`, 'gi')) ||
 							id.match(new RegExp(`${searchRequest}`, 'gi'))
 				  );
-		setFilteredCoursesList(searchCourses);
+		setFilteredCoursesList(
+			formatCoursesList(searchCourses, allAuthorsList, durationSettings)
+		);
 	};
 
 	const handleClickAddNewCourse = () => {
-		navigate('/courses/add');
+		navigate(urls.addCourse);
+	};
+
+	const handleShowCourse = (id) => {
+		navigate(`${urls.courses}/${id}`);
+	};
+
+	const handleUpdateCourse = (id) => {
+		const courseForUpdate = coursesList.find((course) => course.id === id);
+		navigate(`${urls.updateCourse}/${id}`, {
+			replace: true,
+			state: courseForUpdate
+				? {
+						...courseForUpdate,
+						courseAuthorsIdsArr: courseForUpdate.authors,
+				  }
+				: null,
+		});
+	};
+
+	const handleRemoveCourse = (id) => {
+		dispatch(fetchCourseRemove(userToken, id));
 	};
 
 	const cards =
 		filteredCoursesList.length === 0
 			? null
 			: filteredCoursesList.map(({ id, ...props }) => (
-					<CourseCard key={id} id={id} {...props} authorsList={authorsList} />
+					<CourseCard
+						key={id}
+						id={id}
+						{...props}
+						onShowCourse={handleShowCourse}
+						onUpdateCourse={handleUpdateCourse}
+						onRemoveCourse={handleRemoveCourse}
+						userRole={userRole}
+					/>
 			  ));
 
 	return (

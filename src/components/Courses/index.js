@@ -1,3 +1,1 @@
-import Courses from './Courses';
-
-export default Courses;
+export { default } from './Courses';

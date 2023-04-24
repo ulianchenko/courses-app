@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import classNames from 'classnames';
 
 import {
 	placeholderText,
@@ -7,7 +8,7 @@ import {
 } from '../../../../constants';
 import validateInput from '../../../../helpers/validateInput';
 
-import './description.scss';
+import './Description.scss';
 
 const Description = ({ courseDescription, handleChangeCourseDescription }) => {
 	const [focused, setFocused] = useState(false);
@@ -23,12 +24,15 @@ const Description = ({ courseDescription, handleChangeCourseDescription }) => {
 		courseDescription.length > 0
 			? validateInput(courseDescription).minLength(2).isValid()
 			: true;
-	const className =
-		valid || focused ? 'description-textarea' : 'description-textarea invalid';
 
 	return (
 		<div className='description'>
-			<div className={className}>
+			<div
+				className={classNames(
+					'description-textarea',
+					!valid && !focused && 'invalid'
+				)}
+			>
 				<label htmlFor={labelText.description}>{labelText.description}</label>
 				<textarea
 					placeholder={placeholderText.description}

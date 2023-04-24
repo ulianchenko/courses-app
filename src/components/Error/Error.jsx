@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import { errorSettings } from '../../constants';
+import { errorSettings, urls } from '../../constants';
 
-import './error.scss';
+import './Error.scss';
 
 const Error = () => {
 	return (
@@ -10,7 +10,7 @@ const Error = () => {
 			<h2 className='error-title'>{errorSettings.title}</h2>
 			<p className='error-text'>{errorSettings.text}</p>
 			<div className='courseInfo-back'>
-				<Link to={'/courses'} className='courseInfo-back__link'>
+				<Link to={urls.courses} className='courseInfo-back__link'>
 					{errorSettings.linkText}
 				</Link>
 			</div>

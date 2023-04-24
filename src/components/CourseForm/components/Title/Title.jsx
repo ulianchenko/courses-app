@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import classNames from 'classnames';
 
 import Input from '../../../../common/Input';
 import Button from '../../../../common/Button';
@@ -11,7 +12,7 @@ import {
 } from '../../../../constants';
 import validateInput from '../../../../helpers/validateInput';
 
-import './title.scss';
+import './Title.scss';
 
 const Title = ({
 	courseTitle,
@@ -34,7 +35,7 @@ const Title = ({
 		courseTitle.length > 0
 			? validateInput(courseTitle).minLength(2).isValid()
 			: true;
-	const className = valid || focused ? 'title-input' : 'title-input invalid';
+
 	const button = updateInfo ? (
 		<Button
 			buttonText={buttonText.updateCourse}
@@ -49,7 +50,9 @@ const Title = ({
 
 	return (
 		<div className='title'>
-			<div className={className}>
+			<div
+				className={classNames('title-input', !valid && !focused && 'invalid')}
+			>
 				<Input
 					onChange={handleChangeCourseTitle}
 					value={courseTitle}
