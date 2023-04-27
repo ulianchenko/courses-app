@@ -1,16 +1,17 @@
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+import createAuthorsStr from '../../helpers/createAuthorsStr';
+import pipeDuration from '../../helpers/pipeDuration';
+import { getCoursesList, getAuthorsList } from '../../selectors';
 import {
 	courseInfoSettings,
 	durationSettings,
 	infoSettings,
+	urls,
 } from '../../constants';
-import createAuthorsStr from '../../helpers/createAuthorsStr';
-import pipeDuration from '../../helpers/pipeDuration';
-import { getCoursesList, getAuthorsList } from '../../selectors';
 
-import './courseInfo.scss';
+import './CourseInfo.scss';
 
 const CourseInfo = () => {
 	const { courseId } = useParams();
@@ -31,10 +32,10 @@ const CourseInfo = () => {
 
 	return (
 		<>
-			{course ? null : <Navigate to={'/courses'} />}
+			{course ? null : <Navigate to={urls.courses} />}
 			<section className='courseInfo'>
 				<div className='courseInfo-back'>
-					<Link to={'/courses'} className='courseInfo-back__link'>
+					<Link to={urls.courses} className='courseInfo-back__link'>
 						{courseInfoSettings.linkText}
 					</Link>
 				</div>

@@ -4,6 +4,8 @@ import { MemoryRouter } from 'react-router-dom';
 
 import Header from '../Header';
 
+import { urls } from '../../../constants';
+
 const mockedState = {
 	user: {
 		isAuth: true,
@@ -22,12 +24,15 @@ const mockedStore = {
 };
 
 test("Header component should have logo and user's name", () => {
-	const route = '/';
+	const route = urls.home;
 
 	const { container } = render(
 		<Provider store={mockedStore}>
 			<MemoryRouter initialEntries={[route]}>
-				<Header />
+				<Header
+					loggedIn={mockedState.user.isAuth}
+					userName={mockedState.user.name}
+				/>
 			</MemoryRouter>
 		</Provider>
 	);

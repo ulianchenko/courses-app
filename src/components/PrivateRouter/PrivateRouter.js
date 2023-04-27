@@ -2,8 +2,9 @@ import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { getUserRole } from '../../selectors';
+import { urls } from '../../constants';
 
-import './privateRouter.scss';
+import './PrivateRouter.scss';
 
 const PrivateRouter = ({ component: Component }) => {
 	const updateInfo = useLocation();
@@ -12,7 +13,7 @@ const PrivateRouter = ({ component: Component }) => {
 	return userRole === 'admin' ? (
 		<Component updateInfo={updateInfo.state} />
 	) : (
-		<Navigate to='/courses' replace={true} />
+		<Navigate to={urls.courses} replace={true} />
 	);
 };
 

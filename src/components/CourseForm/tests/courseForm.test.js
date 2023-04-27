@@ -11,6 +11,7 @@ import {
 	mockedAuthorsList,
 	buttonText,
 	placeholderText,
+	urls,
 } from '../../../constants';
 
 const mockedState = {
@@ -38,7 +39,7 @@ const updateInfo = {
 };
 
 test('CourseForm should show authors lists (all and course authors)', () => {
-	const route = '/courses/add';
+	const route = urls.addCourse;
 
 	const { container } = render(
 		<Provider store={mockedStore}>
@@ -80,7 +81,7 @@ test('CourseForm should show authors lists (all and course authors)', () => {
 });
 
 test('CourseForm "Create author" click button should call dispatch', () => {
-	const route = '/courses/add';
+	const route = urls.addCourse;
 
 	render(
 		<Provider store={mockedStore}>
@@ -98,7 +99,7 @@ test('CourseForm "Create author" click button should call dispatch', () => {
 });
 
 test('CourseForm "Add author" button click should add an author to course authors list', () => {
-	const route = '/courses/add';
+	const route = urls.addCourse;
 
 	const { container } = render(
 		<Provider store={mockedStore}>
@@ -157,7 +158,7 @@ test('CourseForm "Add author" button click should add an author to course author
 });
 
 test('CourseForm "Delete author" button click should delete an author from the course list', () => {
-	const route = '/courses/add';
+	const route = urls.addCourse;
 
 	const { container } = render(
 		<Provider store={mockedStore}>

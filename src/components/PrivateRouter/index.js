@@ -1,3 +1,1 @@
-import PrivateRouter from './PrivateRouter';
-
-export default PrivateRouter;
+export { default } from './PrivateRouter';

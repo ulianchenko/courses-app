@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import classNames from 'classnames';
 
 import Header from '../Header';
 import Input from '../../common/Input';
@@ -13,9 +14,10 @@ import {
 	labelText,
 	buttonText,
 	registrationSettings,
+	urls,
 } from '../../constants';
 
-import './registration.scss';
+import './Registration.scss';
 
 const Registration = () => {
 	const [name, setName] = useState('');
@@ -48,7 +50,7 @@ const Registration = () => {
 			const response = await postRegister(newUser);
 			const result = await response.json();
 			if (response.ok) {
-				navigate('/login');
+				navigate(urls.login);
 			} else {
 				setBadResponse(result.errors);
 				throw Error(response.statusText);
@@ -56,16 +58,17 @@ const Registration = () => {
 		} catch (error) {}
 	};
 
-	const registrationClassName =
-		badResponse.length > 0
-			? 'registration-form badResponse'
-			: 'registration-form';
-
 	return (
 		<div className='container'>
 			<Header showLoginInfo={false} />
 			<section className='registration'>
-				<form className={registrationClassName} onSubmit={handleSubmit}>
+				<form
+					className={classNames(
+						'registration-form',
+						badResponse.length > 0 && 'badResponse'
+					)}
+					onSubmit={handleSubmit}
+				>
 					<h3 className='registration-form__title'>{titleText.registration}</h3>
 					<div className='registration-form__input'>
 						<Input
@@ -97,7 +100,7 @@ const Registration = () => {
 					</div>
 					<p className='registration-form__text'>
 						{registrationSettings.info}{' '}
-						<Link to={'/login'}>{registrationSettings.login}</Link>
+						<Link to={urls.login}>{registrationSettings.login}</Link>
 					</p>
 				</form>
 				{badResponse.length > 0 ? (

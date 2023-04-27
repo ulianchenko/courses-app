@@ -17,9 +17,9 @@ import validateCreateCourse from '../../helpers/validateCreateCourse';
 import filteredAuthorsFromIds from '../../helpers/filteredAuthorsFromIds';
 import filteredCourseAuthorsFromIds from '../../helpers/filteredCourseAuthorsFromIds';
 import filteredAuthorsFromList from '../../helpers/filteredAuthorsFromList';
-import { validateText } from '../../constants';
+import { validateText, urls } from '../../constants';
 
-import './courseForm.scss';
+import './CourseForm.scss';
 import { fetchCourseUpdate } from '../../store/courses/thunk';
 
 const CourseForm = ({ updateInfo }) => {
@@ -79,7 +79,7 @@ const CourseForm = ({ updateInfo }) => {
 
 		dispatch(fetchCourseAdd(token, newCourse));
 
-		navigate('/courses');
+		navigate(urls.courses);
 	};
 
 	const handleClickUpdateCourse = () => {
@@ -102,7 +102,7 @@ const CourseForm = ({ updateInfo }) => {
 			authors: courseAuthors.map((courseAuthor) => courseAuthor.id),
 		};
 		dispatch(fetchCourseUpdate(token, id, course));
-		navigate('/courses');
+		navigate(urls.courses);
 	};
 
 	const handleChangeCourseTitle = ({ target }) => {

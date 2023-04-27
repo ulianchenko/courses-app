@@ -149,6 +149,15 @@ const http = {
 	register: '/register',
 };
 
+const urls = {
+	home: '/',
+	courses: '/courses',
+	addCourse: '/courses/add',
+	updateCourse: '/courses/update',
+	login: '/login',
+	registration: '/registration',
+};
+
 export {
 	mockedCoursesList,
 	mockedAuthorsList,
@@ -158,11 +167,12 @@ export {
 	titleText,
 	durationSettings,
 	infoSettings,
+	errorSettings,
 	paragraphText,
 	validateText,
 	registrationSettings,
 	loginSettings,
 	courseInfoSettings,
 	http,
-	errorSettings,
+	urls,
 };

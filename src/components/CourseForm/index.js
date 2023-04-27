@@ -1,3 +1,1 @@
-import CourseForm from './CourseForm';
-
-export default CourseForm;
+export { default } from './CourseForm';

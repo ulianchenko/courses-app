@@ -6,7 +6,7 @@ import {
 	MemoryRouter,
 } from 'react-router-dom';
 
-import App from '../../../App';
+import Home from '../../Home';
 import PrivateRouter from '../../PrivateRouter';
 import Courses from '../Courses';
 import CourseForm from '../../CourseForm';
@@ -15,6 +15,7 @@ import {
 	mockedCoursesList,
 	mockedAuthorsList,
 	buttonText,
+	urls,
 } from '../../../constants';
 
 const mockedState = {
@@ -36,7 +37,7 @@ const mockedStore = {
 };
 
 test('Courses should display amount of CourseCard equal length of courses array', () => {
-	const route = '/courses';
+	const route = urls.courses;
 
 	const { container } = render(
 		<Provider store={mockedStore}>
@@ -52,7 +53,7 @@ test('Courses should display amount of CourseCard equal length of courses array'
 });
 
 test('Courses should display Empty container if courses array length is 0', () => {
-	const route = '/courses';
+	const route = urls.courses;
 
 	const mockedStateZeroCourses = {
 		user: {
@@ -84,17 +85,35 @@ test('Courses should display Empty container if courses array length is 0', () =
 });
 
 test('CourseForm should be showed after a click on a button "Add new course"', () => {
+	const localStorageMock = (function () {
+		let store = {};
+
+		return {
+			getItem(key) {
+				return store[key];
+			},
+
+			setItem(key, value) {
+				store[key] = value;
+			},
+		};
+	})();
+
+	Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+
+	window.localStorage.setItem('token', 'testToken');
+
 	const router = createBrowserRouter([
 		{
-			path: '/',
-			element: <App />,
+			path: urls.home,
+			element: <Home />,
 			children: [
 				{
-					path: '/courses',
+					path: urls.courses,
 					element: <Courses />,
 				},
 				{
-					path: '/courses/add',
+					path: urls.addCourse,
 					element: <PrivateRouter component={CourseForm} />,
 				},
 			],
@@ -103,7 +122,9 @@ test('CourseForm should be showed after a click on a button "Add new course"', (
 
 	const { container } = render(
 		<Provider store={mockedStore}>
-			<RouterProvider router={router} />
+			<RouterProvider router={router}>
+				<Home />
+			</RouterProvider>
 		</Provider>
 	);
 

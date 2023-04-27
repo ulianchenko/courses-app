@@ -6,19 +6,21 @@ import CourseCard from '../CourseCard';
 
 import pipeDuration from '../../../../../helpers/pipeDuration';
 import createAuthorsStr from '../../../../../helpers/createAuthorsStr';
+import formatCoursesList from '../../../../../helpers/formatCoursesList';
 import {
 	mockedCoursesList,
 	mockedAuthorsList,
 	durationSettings,
+	urls,
 } from '../../../../../constants';
 
 const mockedState = {
 	user: {
-		isAuth: true,
+		isAuth: false,
 		name: '',
 		email: '',
-		token: 'test token',
-		role: 'user',
+		token: '',
+		role: '',
 	},
 	courses: mockedCoursesList,
 	authors: mockedAuthorsList,
@@ -28,14 +30,19 @@ const mockedStore = {
 	subscribe: jest.fn(),
 	dispatch: jest.fn(),
 };
+const formatedCoursesList = formatCoursesList(
+	mockedCoursesList,
+	mockedAuthorsList,
+	durationSettings
+);
 
 test('CourseCard should display title', () => {
-	const route = '/courses';
+	const route = urls.courses;
 
 	const { container } = render(
 		<Provider store={mockedStore}>
 			<MemoryRouter initialEntries={[route]}>
-				<CourseCard {...mockedCoursesList[0]} authorsList={mockedAuthorsList} />
+				<CourseCard {...formatedCoursesList[0]} />
 			</MemoryRouter>
 		</Provider>
 	);
@@ -47,12 +54,12 @@ test('CourseCard should display title', () => {
 });
 
 test('CourseCard should display description', () => {
-	const route = '/courses';
+	const route = urls.courses;
 
 	const { container } = render(
 		<Provider store={mockedStore}>
 			<MemoryRouter initialEntries={[route]}>
-				<CourseCard {...mockedCoursesList[0]} authorsList={mockedAuthorsList} />
+				<CourseCard {...formatedCoursesList[0]} />
 			</MemoryRouter>
 		</Provider>
 	);
@@ -66,12 +73,12 @@ test('CourseCard should display description', () => {
 });
 
 test('CourseCard should display duration in the correct format', () => {
-	const route = '/courses';
+	const route = urls.courses;
 
 	const { container } = render(
 		<Provider store={mockedStore}>
 			<MemoryRouter initialEntries={[route]}>
-				<CourseCard {...mockedCoursesList[0]} authorsList={mockedAuthorsList} />
+				<CourseCard {...formatedCoursesList[0]} />
 			</MemoryRouter>
 		</Provider>
 	);
@@ -87,12 +94,12 @@ test('CourseCard should display duration in the correct format', () => {
 });
 
 test('CourseCard should display authors list', () => {
-	const route = '/courses';
+	const route = urls.courses;
 
 	const { container } = render(
 		<Provider store={mockedStore}>
 			<MemoryRouter initialEntries={[route]}>
-				<CourseCard {...mockedCoursesList[0]} authorsList={mockedAuthorsList} />
+				<CourseCard {...formatedCoursesList[0]} />
 			</MemoryRouter>
 		</Provider>
 	);
@@ -109,12 +116,12 @@ test('CourseCard should display authors list', () => {
 });
 
 test('CourseCard should display created date in the correct format', () => {
-	const route = '/courses';
+	const route = urls.courses;
 
 	const { container } = render(
 		<Provider store={mockedStore}>
 			<MemoryRouter initialEntries={[route]}>
-				<CourseCard {...mockedCoursesList[0]} authorsList={mockedAuthorsList} />
+				<CourseCard {...formatedCoursesList[0]} />
 			</MemoryRouter>
 		</Provider>
 	);

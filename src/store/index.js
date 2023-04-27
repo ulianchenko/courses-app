@@ -21,4 +21,13 @@ const store = createStore(
 	composeWithDevToolsDevelopmentOnly(applyMiddleware(thunkMiddleware))
 );
 
+store.subscribe(() => {
+	const token = store.getState().user.token;
+	if (!token) {
+		localStorage.removeItem('token');
+	} else {
+		localStorage.setItem('token', token);
+	}
+});
+
 export default store;

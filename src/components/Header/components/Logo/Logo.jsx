@@ -1,4 +1,4 @@
-import { ReactComponent as MainLogo } from '../../../../assets/svg/logo.svg';
+import { ReactComponent as MainLogo } from './assets/logo.svg';
 
 const Logo = () => <MainLogo />;
 

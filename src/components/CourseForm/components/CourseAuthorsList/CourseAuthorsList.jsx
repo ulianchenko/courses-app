@@ -2,7 +2,7 @@ import Button from '../../../../common/Button';
 
 import { titleText, buttonText, paragraphText } from '../../../../constants';
 
-import './courseAuthorsList.scss';
+import './CourseAuthorsList.scss';
 
 const CourseAuthorsList = ({ courseAuthors, handleClickDeleteAuthor }) => {
 	const courseAuthorsList = courseAuthors.map((courseAuthor) => (

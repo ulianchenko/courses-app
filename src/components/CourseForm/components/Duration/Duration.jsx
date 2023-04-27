@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 import Input from '../../../../common/Input';
 
 import {
@@ -10,7 +12,7 @@ import {
 import pipeDuration from '../../../../helpers/pipeDuration';
 import validateInput from '../../../../helpers/validateInput';
 
-import './duration.scss';
+import './Duration.scss';
 
 const Duration = ({ courseDuration, handleChangeCourseDuration }) => {
 	const durationStr = pipeDuration(courseDuration, durationSettings);
@@ -19,12 +21,11 @@ const Duration = ({ courseDuration, handleChangeCourseDuration }) => {
 		courseDuration.length > 0
 			? validateInput(courseDuration).isNumbersOnly().isMoreThanZero().isValid()
 			: true;
-	const className = valid ? 'duration-input' : 'duration-input invalid';
 
 	return (
 		<div className='duration'>
 			<h3 className='duration-title'>{titleText.duration}</h3>
-			<div className={className}>
+			<div className={classNames('duration-input', !valid && 'invalid')}>
 				<Input
 					onChange={handleChangeCourseDuration}
 					value={Number(courseDuration) ? courseDuration : ''}
