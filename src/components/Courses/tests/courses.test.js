@@ -36,98 +36,100 @@ const mockedStore = {
 	dispatch: jest.fn(),
 };
 
-test('Courses should display amount of CourseCard equal length of courses array', () => {
-	const route = urls.courses;
+describe('Courses', () => {
+	it('should display amount of CourseCard equal length of courses array', () => {
+		const route = urls.courses;
 
-	const { container } = render(
-		<Provider store={mockedStore}>
-			<MemoryRouter initialEntries={[route]}>
-				<Courses />
-			</MemoryRouter>
-		</Provider>
-	);
+		const { container } = render(
+			<Provider store={mockedStore}>
+				<MemoryRouter initialEntries={[route]}>
+					<Courses />
+				</MemoryRouter>
+			</Provider>
+		);
 
-	expect(container.querySelectorAll('.card').length).toBe(
-		mockedCoursesList.length
-	);
-});
+		expect(container.querySelectorAll('.card').length).toBe(
+			mockedCoursesList.length
+		);
+	});
 
-test('Courses should display Empty container if courses array length is 0', () => {
-	const route = urls.courses;
+	it('should display empty container if courses array length is 0', () => {
+		const route = urls.courses;
 
-	const mockedStateZeroCourses = {
-		user: {
-			isAuth: true,
-			name: '',
-			email: '',
-			token: '',
-			role: 'user',
-		},
-		courses: [],
-		authors: mockedAuthorsList,
-	};
-
-	const mockedStoreZeroCourses = {
-		getState: () => mockedStateZeroCourses,
-		subscribe: jest.fn(),
-		dispatch: jest.fn(),
-	};
-
-	const { container } = render(
-		<Provider store={mockedStoreZeroCourses}>
-			<MemoryRouter initialEntries={[route]}>
-				<Courses />
-			</MemoryRouter>
-		</Provider>
-	);
-
-	expect(container.querySelectorAll('.card')).toHaveLength(0);
-});
-
-test('CourseForm should be showed after a click on a button "Add new course"', () => {
-	const localStorageMock = (function () {
-		let store = {};
-
-		return {
-			getItem(key) {
-				return store[key];
+		const mockedStateZeroCourses = {
+			user: {
+				isAuth: true,
+				name: '',
+				email: '',
+				token: '',
+				role: 'user',
 			},
-
-			setItem(key, value) {
-				store[key] = value;
-			},
+			courses: [],
+			authors: mockedAuthorsList,
 		};
-	})();
 
-	Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+		const mockedStoreZeroCourses = {
+			getState: () => mockedStateZeroCourses,
+			subscribe: jest.fn(),
+			dispatch: jest.fn(),
+		};
 
-	window.localStorage.setItem('token', 'testToken');
+		const { container } = render(
+			<Provider store={mockedStoreZeroCourses}>
+				<MemoryRouter initialEntries={[route]}>
+					<Courses />
+				</MemoryRouter>
+			</Provider>
+		);
 
-	const router = createBrowserRouter([
-		{
-			path: urls.home,
-			element: <Home />,
-			children: [
-				{
-					path: urls.courses,
-					element: <Courses />,
+		expect(container.querySelectorAll('.card')).toHaveLength(0);
+	});
+
+	it('CourseForm should be showed after a click on a button "Add new course"', () => {
+		const localStorageMock = (function () {
+			let store = {};
+
+			return {
+				getItem(key) {
+					return store[key];
 				},
-				{
-					path: urls.addCourse,
-					element: <PrivateRouter component={CourseForm} />,
+
+				setItem(key, value) {
+					store[key] = value;
 				},
-			],
-		},
-	]);
+			};
+		})();
 
-	const { container } = render(
-		<Provider store={mockedStore}>
-			<RouterProvider router={router}>
-				<Home />
-			</RouterProvider>
-		</Provider>
-	);
+		Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
-	fireEvent.click(screen.getByText(`${buttonText.addNewCourse}`));
-	expect(container.querySelector('.createCourse')).toBeInTheDocument();
+		window.localStorage.setItem('token', 'testToken');
+
+		const router = createBrowserRouter([
+			{
+				path: urls.home,
+				element: <Home />,
+				children: [
+					{
+						path: urls.courses,
+						element: <Courses />,
+					},
+					{
+						path: urls.addCourse,
+						element: <PrivateRouter component={CourseForm} />,
+					},
+				],
+			},
+		]);
+
+		const { container } = render(
+			<Provider store={mockedStore}>
+				<RouterProvider router={router}>
+					<Home />
+				</RouterProvider>
+			</Provider>
+		);
+
+		fireEvent.click(screen.getByText(`${buttonText.addNewCourse}`));
+		expect(container.querySelector('.createCourse')).toBeInTheDocument();
+	});
 });

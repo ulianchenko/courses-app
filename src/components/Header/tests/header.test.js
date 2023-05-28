@@ -23,22 +23,24 @@ const mockedStore = {
 	dispatch: jest.fn(),
 };
 
-test("Header component should have logo and user's name", () => {
-	const route = urls.home;
+describe('Header', () => {
+	it("should have logo and user's name", () => {
+		const route = urls.home;
 
-	const { container } = render(
-		<Provider store={mockedStore}>
-			<MemoryRouter initialEntries={[route]}>
-				<Header
-					loggedIn={mockedState.user.isAuth}
-					userName={mockedState.user.name}
-				/>
-			</MemoryRouter>
-		</Provider>
-	);
+		const { container } = render(
+			<Provider store={mockedStore}>
+				<MemoryRouter initialEntries={[route]}>
+					<Header
+						loggedIn={mockedState.user.isAuth}
+						userName={mockedState.user.name}
+					/>
+				</MemoryRouter>
+			</Provider>
+		);
 
-	expect(container.querySelector('.header svg')).toBeInTheDocument();
-	expect(container.querySelector('.header-login__username')).toHaveTextContent(
-		mockedState.user.name
-	);
+		expect(container.querySelector('.header svg')).toBeInTheDocument();
+		expect(
+			container.querySelector('.header-login__username')
+		).toHaveTextContent(mockedState.user.name);
+	});
 });

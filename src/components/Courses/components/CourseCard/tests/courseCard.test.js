@@ -36,97 +36,99 @@ const formatedCoursesList = formatCoursesList(
 	durationSettings
 );
 
-test('CourseCard should display title', () => {
-	const route = urls.courses;
+describe('CourseCard', () => {
+	it('should display title', () => {
+		const route = urls.courses;
 
-	const { container } = render(
-		<Provider store={mockedStore}>
-			<MemoryRouter initialEntries={[route]}>
-				<CourseCard {...formatedCoursesList[0]} />
-			</MemoryRouter>
-		</Provider>
-	);
+		const { container } = render(
+			<Provider store={mockedStore}>
+				<MemoryRouter initialEntries={[route]}>
+					<CourseCard {...formatedCoursesList[0]} />
+				</MemoryRouter>
+			</Provider>
+		);
 
-	expect(container.querySelector('.card-text__title')).toBeInTheDocument();
-	expect(container.querySelector('.card-text__title')).toHaveTextContent(
-		mockedCoursesList[0].title
-	);
-});
+		expect(container.querySelector('.card-text__title')).toBeInTheDocument();
+		expect(container.querySelector('.card-text__title')).toHaveTextContent(
+			mockedCoursesList[0].title
+		);
+	});
 
-test('CourseCard should display description', () => {
-	const route = urls.courses;
+	it('should display description', () => {
+		const route = urls.courses;
 
-	const { container } = render(
-		<Provider store={mockedStore}>
-			<MemoryRouter initialEntries={[route]}>
-				<CourseCard {...formatedCoursesList[0]} />
-			</MemoryRouter>
-		</Provider>
-	);
+		const { container } = render(
+			<Provider store={mockedStore}>
+				<MemoryRouter initialEntries={[route]}>
+					<CourseCard {...formatedCoursesList[0]} />
+				</MemoryRouter>
+			</Provider>
+		);
 
-	expect(
-		container.querySelector('.card-text__description')
-	).toBeInTheDocument();
-	expect(container.querySelector('.card-text__description')).toHaveTextContent(
-		mockedCoursesList[0].description
-	);
-});
+		expect(
+			container.querySelector('.card-text__description')
+		).toBeInTheDocument();
+		expect(
+			container.querySelector('.card-text__description')
+		).toHaveTextContent(mockedCoursesList[0].description);
+	});
 
-test('CourseCard should display duration in the correct format', () => {
-	const route = urls.courses;
+	it('should display duration in the correct format', () => {
+		const route = urls.courses;
 
-	const { container } = render(
-		<Provider store={mockedStore}>
-			<MemoryRouter initialEntries={[route]}>
-				<CourseCard {...formatedCoursesList[0]} />
-			</MemoryRouter>
-		</Provider>
-	);
+		const { container } = render(
+			<Provider store={mockedStore}>
+				<MemoryRouter initialEntries={[route]}>
+					<CourseCard {...formatedCoursesList[0]} />
+				</MemoryRouter>
+			</Provider>
+		);
 
-	const durationStr = pipeDuration(
-		mockedCoursesList[0].duration,
-		durationSettings
-	);
+		const durationStr = pipeDuration(
+			mockedCoursesList[0].duration,
+			durationSettings
+		);
 
-	expect(container.querySelector('.card-info__duration')).toHaveTextContent(
-		`${durationStr} ${durationSettings.hours}`
-	);
-});
+		expect(container.querySelector('.card-info__duration')).toHaveTextContent(
+			`${durationStr} ${durationSettings.hours}`
+		);
+	});
 
-test('CourseCard should display authors list', () => {
-	const route = urls.courses;
+	it('should display authors list', () => {
+		const route = urls.courses;
 
-	const { container } = render(
-		<Provider store={mockedStore}>
-			<MemoryRouter initialEntries={[route]}>
-				<CourseCard {...formatedCoursesList[0]} />
-			</MemoryRouter>
-		</Provider>
-	);
+		const { container } = render(
+			<Provider store={mockedStore}>
+				<MemoryRouter initialEntries={[route]}>
+					<CourseCard {...formatedCoursesList[0]} />
+				</MemoryRouter>
+			</Provider>
+		);
 
-	const authorsStr = createAuthorsStr(
-		mockedCoursesList[0].authors,
-		mockedAuthorsList
-	);
+		const authorsStr = createAuthorsStr(
+			mockedCoursesList[0].authors,
+			mockedAuthorsList
+		);
 
-	expect(container.querySelector('.card-info__authors')).toBeInTheDocument();
-	expect(container.querySelector('.card-info__authors')).toHaveTextContent(
-		`${authorsStr}`
-	);
-});
+		expect(container.querySelector('.card-info__authors')).toBeInTheDocument();
+		expect(container.querySelector('.card-info__authors')).toHaveTextContent(
+			`${authorsStr}`
+		);
+	});
 
-test('CourseCard should display created date in the correct format', () => {
-	const route = urls.courses;
+	it('should display created date in the correct format', () => {
+		const route = urls.courses;
 
-	const { container } = render(
-		<Provider store={mockedStore}>
-			<MemoryRouter initialEntries={[route]}>
-				<CourseCard {...formatedCoursesList[0]} />
-			</MemoryRouter>
-		</Provider>
-	);
+		const { container } = render(
+			<Provider store={mockedStore}>
+				<MemoryRouter initialEntries={[route]}>
+					<CourseCard {...formatedCoursesList[0]} />
+				</MemoryRouter>
+			</Provider>
+		);
 
-	expect(container.querySelector('.card-info__created')).toHaveTextContent(
-		`${mockedCoursesList[0].creationDate.replace(/\//g, '.')}`
-	);
+		expect(container.querySelector('.card-info__created')).toHaveTextContent(
+			`${mockedCoursesList[0].creationDate.replace(/\//g, '.')}`
+		);
+	});
 });
